@@ -10,7 +10,10 @@ const nav = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 border-b border-brand-mint/60 bg-white/95 backdrop-blur">
+    <header
+      className="sticky top-0 left-0 right-0 z-50 border-b border-brand-mint/60 bg-white/95 backdrop-blur"
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
+    >
       <div className="container-x flex h-14 items-center justify-between md:h-20">
         <a href="#top" className="shrink-0">
           <Logo />
