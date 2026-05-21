@@ -30,7 +30,7 @@ export default function Footer() {
           <ul className="mt-3 space-y-2 text-sm">
             <li><a href="tel:+78001234567" className="hover:text-white">+7 (800) 123-45-67</a></li>
             <li><a href="mailto:franchise@cvetomir.ru" className="hover:text-white">franchise@cvetomir.ru</a></li>
-            <li className="text-white/60">© {new Date().getFullYear()} ЦветоМир</li>
+            <li className="text-white/60">© {new Date().getFullYear()} ЦветоМир · v1.0.1</li>
           </ul>
         </div>
       </div>
