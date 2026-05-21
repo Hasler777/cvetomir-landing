@@ -28,7 +28,7 @@ export default function Trust() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#cta" className="btn-primary">Получить презентацию франшизы</a>
-            <a href="#cta" className="inline-flex items-center justify-center rounded-full border-2 border-white/70 px-7 py-4 font-semibold text-white transition hover:bg-white hover:text-brand-green">
+            <a href="#cta" className="inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-white/70 px-7 py-4 font-semibold text-white transition-colors duration-150 [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-brand-green">
               Рассчитать запуск под ваш город
             </a>
           </div>
