@@ -19,12 +19,12 @@ export default function Founder() {
             передавать партнёрам как готовую систему.
           </p>
 
-          <blockquote className="mt-8 rounded-card border-l-4 border-brand-yellow bg-white/5 p-6 backdrop-blur">
-            <p className="font-display text-xl italic md:text-2xl">
+          <blockquote className="mt-8 rounded-card border-l-4 border-brand-yellow bg-white/30 p-6 backdrop-blur-md">
+            <p className="font-display text-xl italic text-white md:text-2xl">
               «Мы не спешили продавать франшизу. Сначала сделали так, чтобы модель
               действительно работала в реальном бизнесе.»
             </p>
-            <footer className="mt-4 text-sm text-brand-yellow">
+            <footer className="mt-4 text-sm text-white/90">
               — Ильнур Хузин, основатель «ЦветоМир»
             </footer>
           </blockquote>
