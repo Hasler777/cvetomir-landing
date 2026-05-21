@@ -19,19 +19,12 @@ const points = [
 
 export default function WhyFlowers() {
   return (
-    <section id="why" className="bg-brand-mint/40 py-20 md:py-28">
+    <section id="why" className="bg-white py-20 md:py-28">
       <div className="container-x">
         <div className="max-w-3xl">
-          <span className="eyebrow">Ниша</span>
-          <h2 className="mt-4 h-section">
+          <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
             Почему цветочный бизнес остаётся востребованным даже в кризис
           </h2>
-          <p className="subtitle mt-5">
-            Цветы — это не просто сезонный товар, они связаны с важными
-            событиями и эмоциями. Спрос формируется не только календарными
-            датами, но и эмоциональной потребностью людей выразить внимание,
-            любовь, поддержку и благодарность.
-          </p>
         </div>
 
         <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
