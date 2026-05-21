@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-green: #2d5f4b;
+  --brand-mint: #d7eadb;
+  --brand-ice: #f1f8f2;
+  --brand-ink: #1d1d1b;
+  --brand-moss: #5f6f66;
+  --brand-lime: #cbcc66;
+  --brand-yellow: #fac94d;
+  --brand-coral: #ee845d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-ice);
+  color: var(--brand-ink);
+  font-family: var(--font-open-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-raleway), system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 md:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-brand-coral px-7 py-4 font-semibold text-white shadow-cta transition hover:bg-[#e9743f] active:translate-y-px;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-green px-7 py-4 font-semibold text-brand-green transition hover:bg-brand-green hover:text-white;
+  }
+
+  .card {
+    @apply rounded-card bg-white p-6 shadow-card;
+  }
+
+  .eyebrow {
+    @apply text-sm uppercase tracking-[0.18em] text-brand-moss;
+  }
+
+  .h-section {
+    @apply font-display text-3xl font-bold leading-[1.1] text-brand-green md:text-5xl;
+  }
+
+  .subtitle {
+    @apply text-base text-brand-moss md:text-lg;
+  }
+}
+
+/* Декоративные «пятна» из брендбука */
+.blob-coral {
+  background: radial-gradient(circle at 30% 30%, var(--brand-coral), transparent 70%);
+}
+.blob-yellow {
+  background: radial-gradient(circle at 30% 30%, var(--brand-yellow), transparent 70%);
+}
+.blob-lime {
+  background: radial-gradient(circle at 30% 30%, var(--brand-lime), transparent 70%);
+}
+.blob-green {
+  background: radial-gradient(circle at 30% 30%, var(--brand-green), transparent 70%);
+}
