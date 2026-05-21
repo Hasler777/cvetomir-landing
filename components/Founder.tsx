@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Petal } from "./FlowerArt";
 
 export default function Founder() {
@@ -30,26 +31,20 @@ export default function Founder() {
           </blockquote>
         </div>
 
-        {/* Портрет-плейсхолдер в фирменных цветах */}
+        {/* Портрет основателя */}
         <div className="order-1 lg:order-2">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-card bg-gradient-to-br from-brand-coral via-brand-yellow to-brand-lime shadow-card">
-            <div className="absolute inset-0 grid place-items-center">
-              <svg viewBox="0 0 200 240" className="h-full w-full" aria-hidden="true">
-                <rect width="200" height="240" fill="url(#bg)" />
-                <defs>
-                  <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0" stopColor="#ee845d" />
-                    <stop offset="1" stopColor="#cbcc66" />
-                  </linearGradient>
-                </defs>
-                <circle cx="100" cy="90" r="38" fill="#f1d6b8" />
-                <path d="M40 240 C 40 170, 160 170, 160 240 Z" fill="#2d5f4b" />
-                <ellipse cx="100" cy="240" rx="80" ry="14" fill="#1d1d1b" opacity="0.15" />
-              </svg>
-              <span className="absolute bottom-4 left-4 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-brand-green">
-                Ильнур Хузин
-              </span>
-            </div>
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-card shadow-card">
+            <Image
+              src="/founder.jpg"
+              alt="Ильнур Хузин — основатель «ЦветоМир»"
+              fill
+              sizes="(min-width: 1024px) 440px, 100vw"
+              className="object-cover"
+              priority
+            />
+            <span className="absolute bottom-4 left-4 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-brand-green">
+              Ильнур Хузин
+            </span>
           </div>
         </div>
       </div>
