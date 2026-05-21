@@ -1,10 +1,10 @@
 import { Petal } from "./FlowerArt";
 
 const stats = [
-  { value: "14+", label: "лет практики" },
-  { value: "Поставки", label: "отлаженные, лучший ассортимент" },
-  { value: "Запуск", label: "без хаоса и убытков" },
-  { value: "Модель", label: "которую можно повторить" },
+  { accent: "14+", tail: "лет практики на рынке" },
+  { accent: "ЛУЧШИЙ", tail: "ассортимент цветов и отлаженная система поставок" },
+  { accent: "Запуск", tail: "без хаоса и убытков" },
+  { accent: "Модель", tail: "которую можно повторить" },
 ];
 
 export default function Trust() {
@@ -15,9 +15,9 @@ export default function Trust() {
 
       <div className="container-x relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <div>
-          <span className="eyebrow !text-brand-yellow">Блок доверия</span>
-          <h2 className="mt-4 font-display text-3xl font-bold leading-tight md:text-5xl">
-            «ЦветоМир» — франшиза, созданная на базе действующей прибыльной сети
+          <h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">
+            <span className="whitespace-nowrap">«ЦветоМир» — франшиза,</span>{" "}
+            созданная на базе действующей прибыльной сети
           </h2>
           <p className="mt-6 max-w-xl text-white/85 md:text-lg">
             Более 14 лет мы развиваемся в реальных рыночных условиях. Мы не
@@ -37,13 +37,15 @@ export default function Trust() {
         <ul className="grid grid-cols-2 gap-4">
           {stats.map((s) => (
             <li
-              key={s.label}
-              className="rounded-card border border-white/15 bg-white/5 p-6 backdrop-blur"
+              key={s.accent}
+              className="rounded-card bg-white p-6 shadow-card"
             >
-              <div className="font-display text-3xl font-extrabold text-brand-yellow md:text-4xl">
-                {s.value}
+              <div className="font-display text-2xl font-extrabold leading-tight text-brand-coral md:text-3xl">
+                {s.accent}
               </div>
-              <div className="mt-2 text-sm text-white/85 md:text-base">{s.label}</div>
+              <div className="mt-2 text-sm font-medium text-brand-ink md:text-base">
+                {s.tail}
+              </div>
             </li>
           ))}
         </ul>
