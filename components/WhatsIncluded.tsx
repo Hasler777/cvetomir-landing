@@ -11,14 +11,16 @@ const items = [
 
 export default function WhatsIncluded() {
   return (
-    <section id="included" className="bg-brand-ice py-20 md:py-28">
+    <section id="included" className="bg-white py-20 md:py-28">
       <div className="container-x">
-        <div className="max-w-3xl">
-          <span className="eyebrow">Что получает партнёр</span>
-          <h2 className="mt-4 h-section">Что включено во франшизу «ЦветоМир»</h2>
+        <div className="max-w-4xl">
+          <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
+            Что включено во франшизу «ЦветоМир»
+          </h2>
           <p className="subtitle mt-5">
-            Сначала мы построили свою сеть магазинов, чтобы наш опыт помог вам
-            быстро и легко запустить собственное дело.
+            Сначала мы построили свою сеть магазинов, чтобы наш опыт помог вам{" "}
+            <span className="font-bold text-brand-coral">быстро и&nbsp;легко</span>{" "}
+            запустить собственное дело.
           </p>
         </div>
 
