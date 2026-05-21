@@ -78,20 +78,31 @@ export default function FinalCTA() {
                 />
               </label>
 
+              <label className="flex items-start gap-3 text-sm text-brand-ink">
+                <input
+                  required
+                  type="checkbox"
+                  name="consent"
+                  className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-brand-coral"
+                />
+                <span>
+                  Я даю согласие на обработку персональных данных в соответствии
+                  с{" "}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-coral underline underline-offset-2"
+                  >
+                    Политикой
+                  </a>
+                  .
+                </span>
+              </label>
+
               <button type="submit" className="btn-primary w-full">
                 Отправить заявку
               </button>
-
-              <p className="text-xs text-brand-moss">
-                Нажимая «Отправить», вы соглашаетесь с{" "}
-                <a
-                  href="/privacy"
-                  className="underline decoration-brand-coral underline-offset-2 hover:text-brand-coral"
-                >
-                  обработкой персональных данных
-                </a>
-                .
-              </p>
             </div>
           )}
         </form>

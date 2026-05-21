@@ -21,6 +21,7 @@ export default function Footer() {
             <li><a href="#economics" className="hover:text-white">Экономика</a></li>
             <li><a href="#steps" className="hover:text-white">Этапы запуска</a></li>
             <li><a href="#founder" className="hover:text-white">Об основателе</a></li>
+            <li><a href="/privacy" className="hover:text-white">Политика обработки ПД</a></li>
           </ul>
         </div>
         <div>
