@@ -10,14 +10,15 @@ const items = [
 
 export default function Audience() {
   return (
-    <section id="audience" className="relative overflow-hidden bg-brand-mint/50 py-20 md:py-28">
+    <section id="audience" className="relative overflow-hidden bg-white py-20 md:py-28">
       <FlowerSprig variant="c" className="absolute right-4 top-10 hidden h-[260px] w-[180px] lg:block" />
       <FlowerSprig variant="b" className="absolute left-2 bottom-10 hidden h-[220px] w-[160px] lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-3xl">
-          <span className="eyebrow">Кому подойдёт</span>
-          <h2 className="mt-4 h-section">Кому подойдёт франшиза «ЦветоМир»</h2>
+          <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
+            Кому подойдёт франшиза «ЦветоМир»
+          </h2>
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
