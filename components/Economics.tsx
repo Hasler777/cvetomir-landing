@@ -3,9 +3,9 @@ import { Petal } from "./FlowerArt";
 const items = [
   { v: "от 1 млн ₽", t: "Запуск", note: "В зависимости от размера магазина" },
   { v: "от 400 000 ₽", t: "Паушальный взнос", note: "Единоразово при запуске" },
-  { v: "3%", t: "Роялти", note: "Мы зарабатываем только когда вы зарабатываете" },
+  { v: "4%", t: "Роялти", note: "Мы зарабатываем только когда вы зарабатываете" },
   { v: "6–12 мес.", t: "Окупаемость", note: "В зависимости от выбранного формата и города" },
-  { v: "300 000 ₽", t: "Средняя прибыль точки", note: "Даже в кризис на основе 14 лет практики" },
+  { v: "300 000 ₽", t: "Средняя прибыль точки", note: "Даже в кризис. На основе 14 лет практики." },
 ];
 
 export default function Economics() {
@@ -16,9 +16,10 @@ export default function Economics() {
 
       <div className="container-x relative">
         <div className="max-w-3xl">
-          <span className="eyebrow !text-brand-green">Экономика франшизы</span>
-          <h2 className="mt-4 h-section">Что нужно для открытия магазина</h2>
-          <p className="subtitle mt-5 !text-brand-green/85">
+          <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
+            Что нужно для открытия магазина
+          </h2>
+          <p className="mt-5 text-base text-brand-ink md:text-lg">
             Помогаем найти лучшие условия для запуска вашей точки.
           </p>
         </div>
@@ -26,7 +27,7 @@ export default function Economics() {
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((it) => (
             <li key={it.t} className="rounded-card bg-white p-6 shadow-card">
-              <div className="font-display text-2xl font-extrabold leading-tight text-brand-green md:text-3xl">
+              <div className="whitespace-nowrap font-display text-xl font-extrabold leading-tight text-brand-green md:text-2xl">
                 {it.v}
               </div>
               <div className="mt-2 font-semibold text-brand-ink">{it.t}</div>
@@ -35,7 +36,7 @@ export default function Economics() {
           ))}
         </ul>
 
-        <p className="mt-10 max-w-3xl text-sm text-brand-green/85 md:text-base">
+        <p className="mt-10 max-w-3xl text-sm text-brand-ink md:text-base">
           Фактические показатели зависят от города, локации, формата магазина и
           качества операционного управления, но сама модель уже опирается на
           практику действующей сети.
