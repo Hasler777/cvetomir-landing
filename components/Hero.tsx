@@ -45,7 +45,7 @@ export default function Hero() {
             <li key={s.label} className="card !p-6">
               <div className="whitespace-nowrap font-display text-4xl font-extrabold leading-none text-brand-ink md:text-4xl">
                 {s.value}
-                <span className="ml-1 text-lg font-bold accent md:text-lg">
+                <span className="ml-1 text-2xl font-extrabold text-brand-coral md:text-2xl">
                   {s.unit}
                 </span>
               </div>
