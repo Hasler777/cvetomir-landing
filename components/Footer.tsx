@@ -16,11 +16,11 @@ export default function Footer() {
             Навигация
           </div>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><a href="#why" className="hover:text-white">Почему цветы</a></li>
-            <li><a href="#included" className="hover:text-white">Что включено</a></li>
+            <li><a href="#why" className="hover:text-white">О нас</a></li>
+            <li><a href="#included" className="hover:text-white">Что входит</a></li>
             <li><a href="#economics" className="hover:text-white">Экономика</a></li>
             <li><a href="#steps" className="hover:text-white">Этапы запуска</a></li>
-            <li><a href="#founder" className="hover:text-white">Основатель</a></li>
+            <li><a href="#founder" className="hover:text-white">Об основателе</a></li>
           </ul>
         </div>
         <div>
