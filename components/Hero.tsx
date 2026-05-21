@@ -40,10 +40,10 @@ export default function Hero() {
         </div>
 
         {/* Карточки цифр — на мобиле по одной в строчку, на десктопе 5 в ряд */}
-        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5">
+        <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-5">
           {stats.map((s) => (
             <li key={s.label} className="card !p-6">
-              <div className="font-display text-4xl font-extrabold leading-none text-brand-ink md:text-4xl">
+              <div className="whitespace-nowrap font-display text-4xl font-extrabold leading-none text-brand-ink md:text-4xl">
                 {s.value}
                 <span className="ml-1 text-lg font-bold accent md:text-lg">
                   {s.unit}
