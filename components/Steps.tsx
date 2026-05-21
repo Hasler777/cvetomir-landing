@@ -9,7 +9,7 @@ const steps = [
 
 export default function Steps() {
   return (
-    <section id="steps" className="seam-soft bg-white py-20 md:py-28">
+    <section id="steps" className="bg-brand-ice py-20 md:py-28">
       <div className="container-x">
         <div className="max-w-3xl">
           <span className="eyebrow">Этапы запуска</span>
@@ -19,24 +19,20 @@ export default function Steps() {
 
         <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
-            <li
-              key={s.t}
-              className="relative rounded-card border border-brand-mint bg-white p-6 shadow-card"
-            >
+            <li key={s.t} className="relative card">
               <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-coral font-display text-xl font-extrabold text-white">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-green font-display text-xl font-extrabold text-brand-yellow">
                   {i + 1}
                 </span>
-                <h3 className="font-display text-xl font-bold text-brand-ink">{s.t}</h3>
+                <h3 className="font-display text-xl font-bold text-brand-green">{s.t}</h3>
               </div>
               <p className="mt-4 text-brand-moss">{s.d}</p>
             </li>
           ))}
         </ol>
 
-        <p className="mt-10 max-w-3xl rounded-2xl border border-brand-mint bg-white px-5 py-4 font-display text-lg text-brand-ink">
-          И вот ваш бизнес работает: приносит прибыль вам и{" "}
-          <span className="font-extrabold accent">радость вашим клиентам</span>.
+        <p className="mt-10 max-w-3xl rounded-2xl bg-brand-mint/60 px-5 py-4 font-display text-lg font-semibold text-brand-green">
+          И вот ваш бизнес работает: приносит прибыль вам и радость вашим клиентам.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">

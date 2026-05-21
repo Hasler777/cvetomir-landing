@@ -1,4 +1,4 @@
-import { BigFlower, Daisy } from "./FlowerArt";
+import { FlowerSprig } from "./FlowerArt";
 
 const items = [
   { color: "#ee845d", t: "Тем, кто хочет открыть своё дело впервые" },
@@ -10,10 +10,9 @@ const items = [
 
 export default function Audience() {
   return (
-    <section id="audience" className="seam-soft relative overflow-x-clip bg-white py-20 md:py-28">
-      <BigFlower variant="a" className="absolute right-2 top-10 hidden h-[180px] w-[180px] lg:block" />
-      <BigFlower variant="c" className="absolute left-2 bottom-10 hidden h-[160px] w-[160px] lg:block" />
-      <Daisy className="absolute right-1/3 top-1/2 hidden h-[80px] w-[80px] xl:block" />
+    <section id="audience" className="relative overflow-hidden bg-brand-mint/50 py-20 md:py-28">
+      <FlowerSprig variant="c" className="absolute right-4 top-10 hidden h-[260px] w-[180px] lg:block" />
+      <FlowerSprig variant="b" className="absolute left-2 bottom-10 hidden h-[220px] w-[160px] lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-3xl">
@@ -24,10 +23,7 @@ export default function Audience() {
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <ul className="space-y-4">
             {items.map((it) => (
-              <li
-                key={it.t}
-                className="flex items-start gap-4 rounded-card border border-brand-mint bg-white p-5 shadow-card"
-              >
+              <li key={it.t} className="flex items-start gap-4 rounded-card bg-white p-5 shadow-card">
                 <span
                   aria-hidden="true"
                   className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white"
@@ -49,7 +45,7 @@ export default function Audience() {
               прибыльный бизнес. Всему остальному мы научим: от подбора букета до
               управления магазином.
             </p>
-            <a href="#cta" className="btn-primary mt-6 !bg-brand-yellow !text-brand-green hover:!bg-[#f0b830]">
+            <a href="#cta" className="mt-6 inline-flex items-center justify-center rounded-full bg-brand-yellow px-6 py-3 font-semibold text-brand-green">
               Обсудить запуск →
             </a>
           </div>
