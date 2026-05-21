@@ -1,25 +1,29 @@
 const points = [
   {
-    title: "Повторные покупки и постоянный спрос",
+    title: "Повторные покупки",
+    accent: "и постоянный спрос",
     text: "Цветы покупают на дни рождения, годовщины, свадьбы и просто так — спрос есть круглый год.",
   },
   {
-    title: "Эмоционально вовлекающий продукт",
+    title: "Эмоционально",
+    accent: "вовлекающий продукт",
     text: "Букет — это способ выразить любовь, поддержку и благодарность. Цена решения остаётся в тени эмоции.",
   },
   {
-    title: "Продажи через оффлайн + онлайн + доставку",
+    title: "Оффлайн + онлайн",
+    accent: "+ доставка",
     text: "Каждая точка работает сразу в трёх каналах, что увеличивает выручку и снижает зависимость от трафика.",
   },
   {
-    title: "Высокая лояльность клиентов",
+    title: "Высокая",
+    accent: "лояльность клиентов",
     text: "При хорошем сервисе клиент возвращается несколько раз в год и приводит знакомых.",
   },
 ];
 
 export default function WhyFlowers() {
   return (
-    <section id="why" className="bg-brand-mint/40 py-20 md:py-28">
+    <section id="why" className="seam-soft bg-white py-20 md:py-28">
       <div className="container-x">
         <div className="max-w-3xl">
           <span className="eyebrow">Ниша</span>
@@ -36,27 +40,25 @@ export default function WhyFlowers() {
 
         <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {points.map((p, i) => (
-            <li key={p.title} className="card relative overflow-hidden">
+            <li
+              key={p.title}
+              className="relative overflow-hidden rounded-card border border-brand-mint bg-white p-6 shadow-card"
+            >
               <span
                 aria-hidden="true"
                 className="absolute -right-6 -top-6 h-16 w-16 rounded-full"
                 style={{
-                  background: [
-                    "#fac94d",
-                    "#ee845d",
-                    "#cbcc66",
-                    "#2d5f4b",
-                  ][i],
+                  background: ["#fac94d", "#ee845d", "#cbcc66", "#2d5f4b"][i],
                   opacity: 0.18,
                 }}
               />
-              <div className="font-display text-2xl font-extrabold text-brand-coral">
+              <div className="accent font-display text-3xl font-extrabold">
                 0{i + 1}
               </div>
-              <h3 className="mt-2 font-display text-lg font-bold text-brand-green">
-                {p.title}
+              <h3 className="mt-3 font-display text-lg font-bold text-brand-ink leading-tight">
+                {p.title} <span className="accent">{p.accent}</span>
               </h3>
-              <p className="mt-2 text-sm text-brand-moss">{p.text}</p>
+              <p className="mt-3 text-sm text-brand-moss">{p.text}</p>
             </li>
           ))}
         </ul>

@@ -1,5 +1,4 @@
 // Декоративные графические элементы в палитре брендбука.
-// Используются в фоне секций (как «пятна» на стр. 3–4 брендбука).
 
 export function Petal({
   className = "",
@@ -9,12 +8,92 @@ export function Petal({
   color?: string;
 }) {
   return (
-    <svg
-      viewBox="0 0 200 200"
-      className={className}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
       <circle cx="100" cy="100" r="100" fill={color} />
+    </svg>
+  );
+}
+
+// Большой цветок без ножки — лепестки + сердцевина. По мотивам брендбука и референсов.
+export function BigFlower({
+  className = "",
+  variant = "a",
+}: {
+  className?: string;
+  variant?: "a" | "b" | "c" | "d" | "e";
+}) {
+  const sets = {
+    a: { petals: "#ee845d", center: "#fac94d", core: "#2d5f4b" },
+    b: { petals: "#fac94d", center: "#ee845d", core: "#2d5f4b" },
+    c: { petals: "#cbcc66", center: "#ee845d", core: "#2d5f4b" },
+    d: { petals: "#d7eadb", center: "#cbcc66", core: "#2d5f4b" },
+    e: { petals: "#ee845d", center: "#cbcc66", core: "#2d5f4b" },
+  } as const;
+  const s = sets[variant];
+
+  return (
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
+      <g transform="translate(100 100)">
+        {/* 8 крупных лепестков */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+          <ellipse
+            key={deg}
+            cx="0"
+            cy="-50"
+            rx="34"
+            ry="50"
+            fill={s.petals}
+            transform={`rotate(${deg})`}
+            opacity="0.95"
+          />
+        ))}
+        {/* Внутренний слой лепестков, чуть мельче и другим оттенком */}
+        {[22, 67, 112, 157, 202, 247, 292, 337].map((deg) => (
+          <ellipse
+            key={deg}
+            cx="0"
+            cy="-30"
+            rx="20"
+            ry="32"
+            fill={s.center}
+            transform={`rotate(${deg})`}
+            opacity="0.9"
+          />
+        ))}
+        {/* Сердцевина */}
+        <circle cx="0" cy="0" r="22" fill={s.core} />
+        <circle cx="0" cy="0" r="14" fill={s.center} opacity="0.45" />
+      </g>
+    </svg>
+  );
+}
+
+// Маленький цветок-«ромашка» — для россыпей
+export function Daisy({
+  className = "",
+  color = "#fac94d",
+  centerColor = "#ee845d",
+}: {
+  className?: string;
+  color?: string;
+  centerColor?: string;
+}) {
+  return (
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
+      <g transform="translate(100 100)">
+        {[0, 60, 120, 180, 240, 300].map((deg) => (
+          <ellipse
+            key={deg}
+            cx="0"
+            cy="-50"
+            rx="26"
+            ry="46"
+            fill={color}
+            transform={`rotate(${deg})`}
+          />
+        ))}
+        <circle cx="0" cy="0" r="22" fill={centerColor} />
+      </g>
     </svg>
   );
 }
@@ -35,7 +114,6 @@ export function FlowerSprig({
 
   return (
     <svg viewBox="0 0 220 320" className={className} aria-hidden="true">
-      {/* Стебель */}
       <path
         d="M110 320 C 110 240, 90 200, 110 130"
         stroke={s.stem}
@@ -43,7 +121,6 @@ export function FlowerSprig({
         strokeLinecap="round"
         fill="none"
       />
-      {/* Листья */}
       <path
         d="M110 250 C 70 240, 50 220, 60 200 C 90 200, 110 220, 110 250 Z"
         fill={s.leaf}
@@ -53,7 +130,6 @@ export function FlowerSprig({
         fill={s.leaf}
         opacity="0.85"
       />
-      {/* Цветок */}
       <g transform="translate(110 80)">
         <circle cx="0" cy="-30" r="26" fill={s.petals[0]} />
         <circle cx="-28" cy="-10" r="26" fill={s.petals[1]} />
@@ -62,38 +138,6 @@ export function FlowerSprig({
         <circle cx="18" cy="22" r="26" fill={s.petals[2]} />
         <circle cx="0" cy="0" r="14" fill="#2d5f4b" />
       </g>
-    </svg>
-  );
-}
-
-export function LeafCorner({
-  className = "",
-  flip = false,
-}: {
-  className?: string;
-  flip?: boolean;
-}) {
-  return (
-    <svg
-      viewBox="0 0 300 300"
-      className={className}
-      style={flip ? { transform: "scaleX(-1)" } : undefined}
-      aria-hidden="true"
-    >
-      <path
-        d="M0 0 Q 180 40 220 140 Q 240 220 140 280 Q 60 250 30 170 Q 0 80 0 0 Z"
-        fill="#2d5f4b"
-        opacity="0.08"
-      />
-      <path
-        d="M40 60 Q 140 80 180 160"
-        stroke="#2d5f4b"
-        strokeWidth="3"
-        fill="none"
-        opacity="0.35"
-      />
-      <ellipse cx="120" cy="110" rx="32" ry="14" fill="#2d5f4b" opacity="0.22" transform="rotate(-25 120 110)" />
-      <ellipse cx="160" cy="160" rx="34" ry="14" fill="#2d5f4b" opacity="0.22" transform="rotate(-15 160 160)" />
     </svg>
   );
 }

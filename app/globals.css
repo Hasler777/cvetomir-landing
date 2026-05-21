@@ -13,12 +13,16 @@
   --brand-coral: #ee845d;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--brand-ice);
+  background: #ffffff;
   color: var(--brand-ink);
   font-family: var(--font-open-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,17 +34,25 @@ h1, h2, h3, h4, .display {
   letter-spacing: -0.01em;
 }
 
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+button:focus, a:focus { outline: none; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-coral); outline-offset: 2px; }
+
 @layer components {
   .container-x {
     @apply mx-auto w-full max-w-container px-5 md:px-8;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-coral px-7 py-4 font-semibold text-white shadow-cta transition hover:bg-[#e9743f] active:translate-y-px;
+    @apply inline-flex items-center justify-center text-center rounded-full bg-brand-coral px-7 py-4 font-semibold text-white shadow-cta transition-colors duration-150 hover:bg-[#e9743f];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-green px-7 py-4 font-semibold text-brand-green transition hover:bg-brand-green hover:text-white;
+    @apply inline-flex items-center justify-center text-center rounded-full border-2 border-brand-green px-7 py-4 font-semibold text-brand-green transition-colors duration-150 hover:bg-brand-green hover:text-white;
   }
 
   .card {
@@ -48,28 +60,64 @@ h1, h2, h3, h4, .display {
   }
 
   .eyebrow {
-    @apply text-sm uppercase tracking-[0.18em] text-brand-moss;
+    @apply text-sm uppercase tracking-[0.18em] text-brand-moss font-semibold;
   }
 
   .h-section {
-    @apply font-display text-3xl font-bold leading-[1.1] text-brand-green md:text-5xl;
+    @apply font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl;
   }
 
   .subtitle {
     @apply text-base text-brand-moss md:text-lg;
   }
+
+  .accent {
+    @apply font-bold text-brand-coral;
+  }
+  .accent-yellow {
+    @apply font-bold text-brand-yellow;
+  }
 }
 
-/* Декоративные «пятна» из брендбука */
-.blob-coral {
-  background: radial-gradient(circle at 30% 30%, var(--brand-coral), transparent 70%);
+/* Мягкие переливы между блоками — несколько слоёв пастельных пятен */
+.seam-soft {
+  position: relative;
+  isolation: isolate;
 }
-.blob-yellow {
-  background: radial-gradient(circle at 30% 30%, var(--brand-yellow), transparent 70%);
+.seam-soft::before,
+.seam-soft::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: -1;
 }
-.blob-lime {
-  background: radial-gradient(circle at 30% 30%, var(--brand-lime), transparent 70%);
+.seam-soft::before {
+  top: -60px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(215, 234, 219, 0.35) 50%,
+    rgba(241, 248, 242, 0.7) 100%
+  );
 }
-.blob-green {
-  background: radial-gradient(circle at 30% 30%, var(--brand-green), transparent 70%);
+.seam-soft::after {
+  bottom: -60px;
+  background: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(250, 201, 77, 0.18) 50%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
 }
+
+/* Декоративные «пятна» */
+.blob-coral { background: radial-gradient(circle at 30% 30%, var(--brand-coral), transparent 70%); }
+.blob-yellow { background: radial-gradient(circle at 30% 30%, var(--brand-yellow), transparent 70%); }
+.blob-lime { background: radial-gradient(circle at 30% 30%, var(--brand-lime), transparent 70%); }
+.blob-green { background: radial-gradient(circle at 30% 30%, var(--brand-green), transparent 70%); }
+.blob-mint { background: radial-gradient(circle at 30% 30%, var(--brand-mint), transparent 70%); }
+
+.no-break { white-space: nowrap; }

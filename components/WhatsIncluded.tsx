@@ -11,14 +11,14 @@ const items = [
 
 export default function WhatsIncluded() {
   return (
-    <section id="included" className="bg-brand-ice py-20 md:py-28">
+    <section id="included" className="seam-soft bg-white py-20 md:py-28">
       <div className="container-x">
         <div className="max-w-3xl">
           <span className="eyebrow">Что получает партнёр</span>
           <h2 className="mt-4 h-section">Что включено во франшизу «ЦветоМир»</h2>
           <p className="subtitle mt-5">
-            Сначала мы построили свою сеть магазинов, чтобы наш опыт помог вам
-            быстро и легко запустить собственное дело.
+            Сначала мы построили свою сеть магазинов, чтобы наш опыт помог вам{" "}
+            <span className="accent">быстро и легко</span> запустить собственное дело.
           </p>
         </div>
 
@@ -26,12 +26,12 @@ export default function WhatsIncluded() {
           {items.map((it) => (
             <li
               key={it.i}
-              className="group card h-full transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(45,95,75,0.14)]"
+              className="group h-full rounded-card border border-brand-mint bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(45,95,75,0.14)]"
             >
-              <span className="inline-flex h-9 items-center rounded-full bg-brand-mint px-3 font-display text-sm font-bold text-brand-green">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-coral font-display text-sm font-bold text-white">
                 {it.i}
               </span>
-              <h3 className="mt-4 font-display text-lg font-bold text-brand-green">
+              <h3 className="mt-4 font-display text-lg font-bold text-brand-ink leading-tight">
                 {it.t}
               </h3>
               <p className="mt-2 text-sm text-brand-moss">{it.d}</p>
