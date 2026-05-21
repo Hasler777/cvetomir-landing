@@ -79,39 +79,9 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-coral); o
   }
 }
 
-/* Мягкие переливы между блоками — несколько слоёв пастельных пятен */
-.seam-soft {
-  position: relative;
-  isolation: isolate;
-}
-.seam-soft::before,
-.seam-soft::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 120px;
-  pointer-events: none;
-  z-index: -1;
-}
-.seam-soft::before {
-  top: -60px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(215, 234, 219, 0.35) 50%,
-    rgba(241, 248, 242, 0.7) 100%
-  );
-}
-.seam-soft::after {
-  bottom: -60px;
-  background: linear-gradient(
-    to top,
-    transparent 0%,
-    rgba(250, 201, 77, 0.18) 50%,
-    rgba(255, 255, 255, 0.85) 100%
-  );
-}
+/* Мягкие переливы между блоками — большие блобы фирменных цветов,
+   которые выходят за границы секций и создают плавную связь. */
+.seam-soft { position: relative; }
 
 /* Декоративные «пятна» */
 .blob-coral { background: radial-gradient(circle at 30% 30%, var(--brand-coral), transparent 70%); }
