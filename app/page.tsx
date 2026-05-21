@@ -9,6 +9,7 @@ import Steps from "@/components/Steps";
 import Founder from "@/components/Founder";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 
 export default function Page() {
   return (
@@ -16,14 +17,14 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
-        <Trust />
-        <WhyFlowers />
-        <WhatsIncluded />
-        <Economics />
-        <Audience />
-        <Steps />
-        <Founder />
-        <FinalCTA />
+        <Reveal><Trust /></Reveal>
+        <Reveal><WhyFlowers /></Reveal>
+        <Reveal><WhatsIncluded /></Reveal>
+        <Reveal><Economics /></Reveal>
+        <Reveal><Audience /></Reveal>
+        <Reveal><Steps /></Reveal>
+        <Reveal><Founder /></Reveal>
+        <Reveal><FinalCTA /></Reveal>
       </main>
       <Footer />
     </>
