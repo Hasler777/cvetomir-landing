@@ -26,8 +26,7 @@ export default function Hero() {
       <BigFlower variant="c" className="absolute -left-6 bottom-4 h-[110px] w-[110px] lg:hidden" />
 
       <div className="container-x relative">
-        <span className="eyebrow">Франшиза цветочного магазина</span>
-        <h1 className="mt-4 max-w-4xl font-display text-4xl font-extrabold leading-[1.05] text-brand-ink md:text-6xl">
+        <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-[1.05] text-brand-ink md:text-6xl">
           Откройте цветочный магазин по модели, проверенной{" "}
           <span className="accent">14 годами</span> реальной работы.
         </h1>
@@ -39,10 +38,6 @@ export default function Hero() {
           <a href="#cta" className="btn-primary">Получить презентацию франшизы</a>
           <a href="#cta" className="btn-secondary">Рассчитать запуск под ваш город</a>
         </div>
-
-        <p className="mt-8 max-w-2xl rounded-2xl border border-brand-green/15 bg-white/80 px-5 py-3 font-display text-base font-semibold text-brand-ink md:text-lg">
-          «Франшиза, выросшая из реальной сети, а не из теории».
-        </p>
 
         {/* Карточки цифр — на мобиле по одной в строчку, на десктопе 5 в ряд */}
         <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5">

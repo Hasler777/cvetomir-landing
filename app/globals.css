@@ -47,12 +47,14 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-coral); o
     @apply mx-auto w-full max-w-container px-5 md:px-8;
   }
 
+  /* Кнопки: hover-эффект только на устройствах с реальным курсором,
+     иначе :hover «залипает» после тапа на мобиле. */
   .btn-primary {
-    @apply inline-flex items-center justify-center text-center rounded-full bg-brand-coral px-7 py-4 font-semibold text-white shadow-cta transition-colors duration-150 hover:bg-[#e9743f];
+    @apply inline-flex items-center justify-center whitespace-nowrap text-center rounded-full bg-brand-coral px-7 py-4 font-semibold text-white shadow-cta transition-colors duration-150;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center text-center rounded-full border-2 border-brand-green px-7 py-4 font-semibold text-brand-green transition-colors duration-150 hover:bg-brand-green hover:text-white;
+    @apply inline-flex items-center justify-center whitespace-nowrap text-center rounded-full border-2 border-brand-green px-7 py-4 font-semibold text-brand-green transition-colors duration-150;
   }
 
   .card {
@@ -82,6 +84,11 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-coral); o
 /* Мягкие переливы между блоками — большие блобы фирменных цветов,
    которые выходят за границы секций и создают плавную связь. */
 .seam-soft { position: relative; }
+
+@media (hover: hover) {
+  .btn-primary:hover { background-color: #e9743f; }
+  .btn-secondary:hover { background-color: var(--brand-green); color: #fff; }
+}
 
 /* Декоративные «пятна» */
 .blob-coral { background: radial-gradient(circle at 30% 30%, var(--brand-coral), transparent 70%); }

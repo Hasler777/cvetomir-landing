@@ -1,11 +1,11 @@
 import Logo from "./Logo";
 
 const nav = [
-  { href: "#why", label: "Почему цветы" },
+  { href: "#why", label: "О нас" },
   { href: "#included", label: "Что входит" },
   { href: "#economics", label: "Экономика" },
-  { href: "#steps", label: "Этапы" },
-  { href: "#founder", label: "Основатель" },
+  { href: "#steps", label: "Этапы запуска" },
+  { href: "#founder", label: "Об основателе" },
 ];
 
 export default function Header() {

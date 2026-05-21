@@ -31,7 +31,7 @@ export default function Economics() {
               key={it.t}
               className="rounded-card border border-brand-mint bg-white p-6 shadow-card"
             >
-              <div className="accent font-display text-2xl font-extrabold leading-tight md:text-3xl">
+              <div className="accent font-display text-xl font-extrabold leading-tight md:text-2xl whitespace-nowrap">
                 {it.v}
               </div>
               <div className="mt-2 font-semibold text-brand-ink">{it.t}</div>
