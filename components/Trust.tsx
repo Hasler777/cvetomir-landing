@@ -14,19 +14,19 @@ export default function Trust() {
       <Petal className="absolute -right-32 -bottom-32 h-[420px] w-[420px] opacity-25" color="#ee845d" />
 
       <div className="container-x relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-        <div>
+        <div className="text-center lg:text-left">
           <h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">
-            <span className="whitespace-nowrap">«ЦветоМир» — франшиза,</span>{" "}
+            <span className="md:whitespace-nowrap">«ЦветоМир» — франшиза,</span>{" "}
             созданная на базе действующей прибыльной сети
           </h2>
-          <p className="mt-6 max-w-xl text-white/85 md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-white/85 md:text-lg lg:mx-0">
             Более 14 лет мы развиваемся в реальных рыночных условиях. Мы не
             спешили с франчайзингом. Сначала отточили ассортимент, логистику,
             сервис, упаковку, доставку, онлайн-продажи и управление магазином.
             Теперь эту систему получает партнёр — для запуска бизнеса с
             поддержкой и готовыми решениями.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
             <a href="#cta" className="btn-primary">Получить презентацию франшизы</a>
             <a href="#cta" className="inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-white/70 px-7 py-4 font-semibold text-white transition-colors duration-150 [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-brand-green">
               Рассчитать запуск под ваш город
