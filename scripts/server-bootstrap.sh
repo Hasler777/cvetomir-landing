@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
-# Подготовка Ubuntu/Debian-сервера под Next.js-лендинг "ЦветоМир".
-# Запускать ОДИН РАЗ от root. После выполнения:
-#   - Node 20, npm, PM2
+# Bootstrap для IPv6-only сервера. Запускать ОДИН РАЗ от root.
+# Можно запускать прямо из web-консоли хостинга:
+#   curl -fsSL https://raw.githubusercontent.com/Hasler777/cvetomir-landing/main/scripts/server-bootstrap.sh | bash
+#
+# После выполнения:
+#   - Node 20, npm, PM2 (autostart)
 #   - Nginx :80 -> :3000
-#   - firewall разрешает 22/80/443
-#   - bare git-репозиторий /srv/git/cvetomir.git с post-receive хуком
-#   - рабочая директория /var/www/cvetomir/current
+#   - ufw 22/80/443
+#   - сайт уже задеплоен из tarball'а через raw.githubusercontent.com (IPv6 OK)
+#   - bare git-репо /srv/git/cvetomir.git с post-receive хуком (для будущих push'ей)
 #
-# Использование (с локальной машины):
-#   ssh root@<HOST> 'bash -s' < scripts/server-bootstrap.sh
-#
-# Переменные окружения (опциональные):
-#   APP_DOMAIN  — server_name в Nginx (по умолчанию _)
-#   APP_PORT    — порт приложения (по умолчанию 3000)
+# Опциональные ENV перед запуском:
+#   SSH_KEY      — публичный SSH-ключ для deploy-пользователя (рекомендуется)
+#   APP_DOMAIN   — server_name в Nginx (по умолчанию _)
+#   GITHUB_REPO  — Hasler777/cvetomir-landing (по умолчанию)
 
 set -euo pipefail
 
@@ -22,95 +23,68 @@ APP_PORT="${APP_PORT:-3000}"
 APP_DOMAIN="${APP_DOMAIN:-_}"
 APP_DIR="/var/www/${APP_NAME}"
 REPO_DIR="/srv/git/${APP_NAME}.git"
+GITHUB_REPO="${GITHUB_REPO:-Hasler777/cvetomir-landing}"
+TARBALL_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/main/initial-release.tar.gz"
 
 log() { printf "\n\033[1;32m▶ %s\033[0m\n" "$*"; }
 
-log "1/8 apt update + базовые пакеты"
+log "0/9 проверка IPv6 + DNS"
+getent ahosts raw.githubusercontent.com | head -1 || {
+  echo "Нет резолвинга raw.githubusercontent.com. Настрой DNS (например, 2001:4860:4860::8888)."; exit 1; }
+
+log "1/9 apt + базовые пакеты"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
 apt-get install -y curl ca-certificates gnupg git ufw nginx rsync sudo build-essential
 
-log "2/8 Node.js 20 (NodeSource)"
+log "2/9 Node.js 20 (NodeSource через Cloudflare CDN, IPv6 OK)"
 if ! command -v node >/dev/null 2>&1 || [ "$(node -v | cut -c2-3)" != "20" ]; then
   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
   apt-get install -y nodejs
 fi
 node -v; npm -v
 
-log "3/8 PM2 + автозапуск"
+log "3/9 PM2 + автозапуск"
 npm install -g pm2@latest
-pm2 startup systemd -u root --hp /root >/dev/null
+pm2 startup systemd -u root --hp /root >/dev/null || true
 
-log "4/8 deploy-пользователь + директории"
+log "4/9 deploy-пользователь + директории"
 id -u "$APP_USER" >/dev/null 2>&1 || adduser --disabled-password --gecos "" "$APP_USER"
 mkdir -p "${APP_DIR}/releases" "${APP_DIR}/shared"
 chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 
-log "5/8 SSH-ключи deploy-пользователя"
 mkdir -p "/home/${APP_USER}/.ssh"
 touch "/home/${APP_USER}/.ssh/authorized_keys"
 chmod 700 "/home/${APP_USER}/.ssh"
 chmod 600 "/home/${APP_USER}/.ssh/authorized_keys"
-chown -R "${APP_USER}:${APP_USER}" "/home/${APP_USER}/.ssh"
-# Если уже есть root authorized_keys — копируем, чтобы заходить тем же ключом
+if [ -n "${SSH_KEY:-}" ]; then
+  echo "$SSH_KEY" >> "/home/${APP_USER}/.ssh/authorized_keys"
+  sort -u "/home/${APP_USER}/.ssh/authorized_keys" -o "/home/${APP_USER}/.ssh/authorized_keys"
+fi
 if [ -f /root/.ssh/authorized_keys ]; then
   cat /root/.ssh/authorized_keys >> "/home/${APP_USER}/.ssh/authorized_keys"
   sort -u "/home/${APP_USER}/.ssh/authorized_keys" -o "/home/${APP_USER}/.ssh/authorized_keys"
 fi
+chown -R "${APP_USER}:${APP_USER}" "/home/${APP_USER}/.ssh"
 
-log "6/8 bare git-репозиторий + post-receive"
-mkdir -p "$REPO_DIR"
-chown -R "${APP_USER}:${APP_USER}" /srv/git
-sudo -u "$APP_USER" git init --bare "$REPO_DIR" >/dev/null
+log "5/9 первичный релиз: качаем tarball из ${TARBALL_URL} (raw.gh — IPv6)"
+TS=$(date +%Y%m%d-%H%M%S)
+RELEASE="${APP_DIR}/releases/${TS}"
+mkdir -p "$RELEASE"
+curl -fsSL "$TARBALL_URL" | tar -xz -C "$RELEASE"
+chown -R "$APP_USER:$APP_USER" "$RELEASE"
 
-cat > "${REPO_DIR}/hooks/post-receive" <<EOF
-#!/usr/bin/env bash
-set -euo pipefail
+log "6/9 npm ci + build (npm registry — IPv6)"
+sudo -u "$APP_USER" bash -lc "cd '$RELEASE' && npm ci --no-audit --no-fund && npm run build"
 
-APP_NAME="${APP_NAME}"
-APP_DIR="${APP_DIR}"
-APP_PORT="${APP_PORT}"
-REPO_DIR="${REPO_DIR}"
+ln -sfn "$RELEASE" "${APP_DIR}/current"
 
-while read -r oldrev newrev refname; do
-  branch="\${refname#refs/heads/}"
-  [ "\$branch" != "main" ] && { echo "skip branch \$branch"; continue; }
+log "7/9 PM2 start"
+sudo -u "$APP_USER" bash -lc "cd '${APP_DIR}/current' && pm2 start ecosystem.config.js && pm2 save"
+# Также включаем autostart от имени deploy-пользователя
+env PATH=$PATH:/usr/bin pm2 startup systemd -u "$APP_USER" --hp "/home/$APP_USER" >/dev/null || true
 
-  TS=\$(date +%Y%m%d-%H%M%S)
-  RELEASE="\${APP_DIR}/releases/\${TS}"
-  mkdir -p "\$RELEASE"
-
-  echo "▶ checkout \$newrev -> \$RELEASE"
-  git --work-tree="\$RELEASE" --git-dir="\$REPO_DIR" checkout -f "\$newrev"
-
-  cd "\$RELEASE"
-  echo "▶ npm ci"
-  npm ci --no-audit --no-fund
-
-  echo "▶ npm run build"
-  npm run build
-
-  echo "▶ switch symlink"
-  ln -sfn "\$RELEASE" "\${APP_DIR}/current"
-
-  echo "▶ pm2 reload"
-  if pm2 describe "\$APP_NAME" >/dev/null 2>&1; then
-    pm2 reload ecosystem.config.js --update-env
-  else
-    pm2 start ecosystem.config.js
-  fi
-  pm2 save
-
-  echo "▶ prune old releases (keep last 5)"
-  ls -1dt "\${APP_DIR}/releases/"*/ | tail -n +6 | xargs -r rm -rf
-
-  echo "✓ deploy done: \$TS"
-done
-EOF
-chmod +x "${REPO_DIR}/hooks/post-receive"
-chown -R "${APP_USER}:${APP_USER}" "$REPO_DIR"
-
-log "7/8 Nginx → 127.0.0.1:${APP_PORT}"
+log "8/9 Nginx 80 -> 127.0.0.1:${APP_PORT}"
 cat > "/etc/nginx/sites-available/${APP_NAME}" <<EOF
 server {
     listen 80 default_server;
@@ -120,7 +94,6 @@ server {
     gzip on;
     gzip_types text/plain text/css application/javascript application/json image/svg+xml;
 
-    # Long-cache для статики Next.js
     location /_next/static/ {
         proxy_pass http://127.0.0.1:${APP_PORT};
         proxy_cache_valid 200 365d;
@@ -145,20 +118,80 @@ rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl reload nginx
 
-log "8/8 firewall"
+log "9/9 firewall + bare repo с post-receive"
 ufw allow OpenSSH || true
 ufw allow 80/tcp || true
 ufw allow 443/tcp || true
 yes | ufw enable || true
-ufw status
 
-log "Готово."
-echo
-echo "Добавь свой публичный SSH-ключ для пользователя 'deploy':"
-echo "  ssh root@<HOST> \"echo 'ssh-ed25519 AAAA... your@laptop' >> /home/${APP_USER}/.ssh/authorized_keys\""
-echo
-echo "Затем на локальной машине:"
-echo "  git remote add server ${APP_USER}@<HOST>:${REPO_DIR}"
-echo "  git push server main"
-echo
-echo "После первого пуша приложение поднимется на http://<HOST>/"
+mkdir -p "$REPO_DIR"
+sudo -u "$APP_USER" git init --bare "$REPO_DIR" >/dev/null
+
+cat > "${REPO_DIR}/hooks/post-receive" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_NAME="${APP_NAME}"
+APP_DIR="${APP_DIR}"
+REPO_DIR="${REPO_DIR}"
+
+while read -r oldrev newrev refname; do
+  branch="\${refname#refs/heads/}"
+  [ "\$branch" != "main" ] && { echo "skip branch \$branch"; continue; }
+
+  TS=\$(date +%Y%m%d-%H%M%S)
+  RELEASE="\${APP_DIR}/releases/\${TS}"
+  mkdir -p "\$RELEASE"
+
+  echo "▶ checkout \$newrev -> \$RELEASE"
+  git --work-tree="\$RELEASE" --git-dir="\$REPO_DIR" checkout -f "\$newrev"
+
+  cd "\$RELEASE"
+  echo "▶ npm ci"
+  npm ci --no-audit --no-fund
+
+  echo "▶ npm run build"
+  npm run build
+
+  echo "▶ switch symlink"
+  ln -sfn "\$RELEASE" "\${APP_DIR}/current"
+
+  echo "▶ pm2 reload"
+  cd "\${APP_DIR}/current"
+  if pm2 describe "\$APP_NAME" >/dev/null 2>&1; then
+    pm2 reload ecosystem.config.js --update-env
+  else
+    pm2 start ecosystem.config.js
+  fi
+  pm2 save
+
+  echo "▶ prune (keep 5)"
+  ls -1dt "\${APP_DIR}/releases/"*/ | tail -n +6 | xargs -r rm -rf
+
+  echo "✓ deploy \$TS"
+done
+EOF
+chmod +x "${REPO_DIR}/hooks/post-receive"
+chown -R "${APP_USER}:${APP_USER}" "$REPO_DIR"
+
+# Удобный кросс-ссылочный симлинк
+ln -sfn "${APP_DIR}/current" "/home/${APP_USER}/app" 2>/dev/null || true
+
+IPV6=$(ip -6 addr show scope global 2>/dev/null | awk '/inet6/ {print $2; exit}' | cut -d/ -f1)
+
+cat <<DONE
+
+==================== ✓ DEPLOY DONE ====================
+Сайт работает: http://[${IPV6:-<v6>}]/
+PM2 статус:    pm2 ls
+Логи:          pm2 logs cvetomir --lines 100
+
+Дальше — настрой автодеплой по push (со своей машины):
+  ssh-copy-id deploy@${IPV6:-<v6>}                   # положить ключ
+  git remote add server deploy@[${IPV6:-<v6>}]:${REPO_DIR}
+  git push server main                                # любой push = redeploy
+
+И смени root-пароль:
+  passwd
+========================================================
+DONE
