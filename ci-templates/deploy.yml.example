@@ -1,0 +1,69 @@
+# Автодеплой на сервер по push в main.
+#
+# ⚠ ВНИМАНИЕ: GitHub-hosted runners сейчас НЕ умеют IPv6 outbound.
+# Этот workflow будет работать в одном из случаев:
+#   1) у сервера появится публичный IPv4
+#   2) сервер будет доступен через Tailscale (см. шаг tailscale ниже)
+#   3) используется self-hosted runner с IPv6
+#
+# До тех пор используем bare-репо на сервере (см. DEPLOY.md).
+#
+# Требуемые GitHub Secrets:
+#   SSH_HOST           — IPv4 или Tailscale-имя сервера
+#   SSH_USER           — deploy
+#   SSH_PRIVATE_KEY    — приватный ключ (ed25519), публичный лежит на сервере
+#   SSH_PORT           — 22 (по умолчанию)
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+
+      # === Вариант через Tailscale (раскомментировать когда настроишь) ===
+      # - uses: tailscale/github-action@v2
+      #   with:
+      #     oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+      #     oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+      #     tags: tag:ci
+
+      - name: Sync build to server
+        uses: easingthemes/ssh-deploy@v5
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT || '22' }}
+          ARGS: "-rlgoDzvc --delete --exclude=.git --exclude=node_modules"
+          SOURCE: "./"
+          TARGET: "/var/www/cvetomir/next-release"
+          SCRIPT_AFTER: |
+            set -e
+            cd /var/www/cvetomir/next-release
+            npm ci --no-audit --no-fund --omit=dev
+            TS=$(date +%Y%m%d-%H%M%S)
+            mv /var/www/cvetomir/next-release /var/www/cvetomir/releases/$TS
+            ln -sfn /var/www/cvetomir/releases/$TS /var/www/cvetomir/current
+            cd /var/www/cvetomir/current
+            pm2 reload ecosystem.config.js --update-env || pm2 start ecosystem.config.js
+            pm2 save
+            ls -1dt /var/www/cvetomir/releases/*/ | tail -n +6 | xargs -r rm -rf
