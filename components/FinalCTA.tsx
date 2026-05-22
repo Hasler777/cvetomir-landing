@@ -86,15 +86,14 @@ export default function FinalCTA() {
                   className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-brand-coral"
                 />
                 <span>
-                  Я даю согласие на обработку персональных данных в соответствии
-                  с{" "}
+                  Нажимая «Отправить», вы соглашаетесь с{" "}
                   <a
                     href="/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-brand-coral underline underline-offset-2"
                   >
-                    Политикой
+                    политикой обработки персональных данных
                   </a>
                   .
                 </span>

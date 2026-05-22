@@ -2,25 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "cookie_consent";
-
 export default function CookieConsent() {
+  // Баннер появляется при каждом открытии сайта (без запоминания между сессиями)
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    try {
-      if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
-    } catch {
-      // localStorage недоступен — баннер не показываем
-    }
+    setVisible(true);
   }, []);
 
-  const accept = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY, "true");
-    } catch {}
-    setVisible(false);
-  };
+  const accept = () => setVisible(false);
 
   if (!visible) return null;
 
