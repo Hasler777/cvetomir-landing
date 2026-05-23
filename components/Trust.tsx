@@ -1,4 +1,4 @@
-import { Petal } from "./FlowerArt";
+import { BigFlower, Petal } from "./FlowerArt";
 
 const stats = [
   { accent: "14+", tail: "лет практики на рынке" },
@@ -12,6 +12,8 @@ export default function Trust() {
     <section className="relative overflow-hidden bg-brand-green py-20 text-white md:py-28">
       <Petal className="absolute -left-32 -top-32 h-[420px] w-[420px] opacity-30" color="#cbcc66" />
       <Petal className="absolute -right-32 -bottom-32 h-[420px] w-[420px] opacity-25" color="#ee845d" />
+      <BigFlower variant="c" className="absolute -left-24 -top-20 hidden h-[300px] w-[300px] opacity-80 lg:block" />
+      <BigFlower variant="a" className="absolute -right-16 -bottom-20 hidden h-[340px] w-[340px] opacity-80 lg:block" />
 
       <div className="container-x relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <div className="text-center lg:text-left">

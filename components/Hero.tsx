@@ -15,15 +15,15 @@ export default function Hero() {
       className="relative flex flex-col justify-center overflow-hidden bg-white pt-8 pb-20 md:min-h-[calc(100svh-5rem)] md:pt-16 md:pb-28"
     >
       {/* Декор — крупные цветы и пятна */}
-      <Petal className="absolute -top-32 -right-20 h-[460px] w-[460px] opacity-50" color="#cbcc66" />
-      <Petal className="absolute -bottom-40 -left-32 h-[420px] w-[420px] opacity-40" color="#fac94d" />
-      <BigFlower variant="a" className="absolute right-4 top-24 hidden h-[220px] w-[220px] lg:block" />
-      <BigFlower variant="c" className="absolute right-40 top-72 hidden h-[140px] w-[140px] xl:block" />
-      <BigFlower variant="b" className="absolute -left-6 bottom-20 hidden h-[200px] w-[200px] lg:block" />
-      <BigFlower variant="e" className="absolute left-44 bottom-2 hidden h-[120px] w-[120px] xl:block" />
+      <Petal className="absolute -top-40 -right-24 h-[560px] w-[560px] opacity-50" color="#cbcc66" />
+      <Petal className="absolute -bottom-48 -left-40 h-[520px] w-[520px] opacity-40" color="#fac94d" />
+      <BigFlower variant="a" className="absolute right-2 top-20 hidden h-[300px] w-[300px] lg:block" />
+      <BigFlower variant="c" className="absolute right-44 top-80 hidden h-[190px] w-[190px] xl:block" />
+      <BigFlower variant="b" className="absolute -left-10 bottom-16 hidden h-[280px] w-[280px] lg:block" />
+      <BigFlower variant="e" className="absolute left-48 bottom-0 hidden h-[170px] w-[170px] xl:block" />
       {/* Мобильный декор — пара цветов */}
-      <BigFlower variant="a" className="absolute -right-6 top-4 h-[110px] w-[110px] lg:hidden" />
-      <BigFlower variant="c" className="absolute -left-6 bottom-4 h-[110px] w-[110px] lg:hidden" />
+      <BigFlower variant="a" className="absolute -right-8 top-2 h-[140px] w-[140px] lg:hidden" />
+      <BigFlower variant="c" className="absolute -left-8 bottom-2 h-[140px] w-[140px] lg:hidden" />
 
       <div className="container-x relative">
         <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-[1.05] text-brand-ink md:text-6xl">

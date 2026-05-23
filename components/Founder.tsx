@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { Petal } from "./FlowerArt";
+import { BigFlower, Petal } from "./FlowerArt";
 
 export default function Founder() {
   return (
     <section id="founder" className="relative overflow-hidden bg-brand-green py-20 text-white md:py-28">
       <Petal className="absolute -right-32 -top-32 h-[420px] w-[420px] opacity-25" color="#fac94d" />
       <Petal className="absolute -left-24 -bottom-24 h-[300px] w-[300px] opacity-25" color="#ee845d" />
+      <BigFlower variant="b" className="absolute -left-20 -top-16 hidden h-[300px] w-[300px] opacity-80 lg:block" />
+      <BigFlower variant="c" className="absolute -right-16 -bottom-20 hidden h-[300px] w-[300px] opacity-75 lg:block" />
 
       <div className="container-x relative grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="order-2 lg:order-1">

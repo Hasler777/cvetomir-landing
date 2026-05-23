@@ -1,3 +1,5 @@
+import { BigFlower, Petal } from "./FlowerArt";
+
 const steps = [
   { t: "Знакомство", d: "Первичная консультация и ответы на ваши вопросы." },
   { t: "Формат и локация", d: "Подбираем подходящий формат точки и помещение, которое нравится вам." },
@@ -9,8 +11,12 @@ const steps = [
 
 export default function Steps() {
   return (
-    <section id="steps" className="bg-brand-ice py-20 md:py-28">
-      <div className="container-x">
+    <section id="steps" className="relative overflow-hidden bg-brand-ice py-20 md:py-28">
+      <Petal className="absolute -right-24 -bottom-24 h-[300px] w-[300px] opacity-30" color="#cbcc66" />
+      <BigFlower variant="a" className="absolute -right-20 -top-16 hidden h-[320px] w-[320px] opacity-80 lg:block" />
+      <BigFlower variant="c" className="absolute -left-16 -bottom-20 hidden h-[280px] w-[280px] opacity-75 lg:block" />
+
+      <div className="container-x relative">
         <div className="max-w-3xl">
           <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
             Пошаговый план открытия

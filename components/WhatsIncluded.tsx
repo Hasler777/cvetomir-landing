@@ -1,3 +1,5 @@
+import { BigFlower, Petal } from "./FlowerArt";
+
 const items = [
   { i: "01", t: "Подбор формата и локации", d: "Помогаем выбрать формат магазина и удачное место с учётом города и трафика." },
   { i: "02", t: "Запуск и оформление точки", d: "Даём рекомендации по дизайну, оборудованию и расходникам." },
@@ -32,8 +34,12 @@ function Chevron({ className = "" }: { className?: string }) {
 
 export default function WhatsIncluded() {
   return (
-    <section id="included" className="bg-white py-20 md:py-28">
-      <div className="container-x">
+    <section id="included" className="relative overflow-hidden bg-white py-20 md:py-28">
+      <Petal className="absolute -left-24 -top-24 h-[260px] w-[260px] opacity-25" color="#cbcc66" />
+      <BigFlower variant="b" className="absolute -right-20 -top-16 hidden h-[320px] w-[320px] opacity-80 lg:block" />
+      <BigFlower variant="e" className="absolute -left-20 -bottom-16 hidden h-[300px] w-[300px] opacity-75 lg:block" />
+
+      <div className="container-x relative">
         <div className="max-w-4xl">
           <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
             Что включено во франшизу «ЦветоМир»

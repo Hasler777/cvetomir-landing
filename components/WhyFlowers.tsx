@@ -1,3 +1,5 @@
+import { BigFlower, Petal } from "./FlowerArt";
+
 const points = [
   {
     title: "Повторные покупки и постоянный спрос",
@@ -19,8 +21,12 @@ const points = [
 
 export default function WhyFlowers() {
   return (
-    <section id="why" className="bg-white py-20 md:py-28">
-      <div className="container-x">
+    <section id="why" className="relative overflow-hidden bg-white py-20 md:py-28">
+      <Petal className="absolute -left-24 -top-24 h-[280px] w-[280px] opacity-30" color="#fac94d" />
+      <BigFlower variant="a" className="absolute -right-20 -top-16 hidden h-[300px] w-[300px] opacity-80 lg:block" />
+      <BigFlower variant="c" className="absolute -left-16 -bottom-20 hidden h-[260px] w-[260px] opacity-70 lg:block" />
+
+      <div className="container-x relative">
         <div className="max-w-3xl">
           <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
             Почему цветочный бизнес остаётся востребованным даже в кризис

@@ -1,4 +1,4 @@
-import { FlowerSprig } from "./FlowerArt";
+import { BigFlower } from "./FlowerArt";
 
 const items = [
   { color: "#ee845d", t: "Тем, кто хочет открыть своё дело впервые" },
@@ -11,8 +11,8 @@ const items = [
 export default function Audience() {
   return (
     <section id="audience" className="relative overflow-hidden bg-white py-20 md:py-28">
-      <FlowerSprig variant="c" className="absolute right-4 top-10 hidden h-[260px] w-[180px] lg:block" />
-      <FlowerSprig variant="b" className="absolute left-2 bottom-10 hidden h-[220px] w-[160px] lg:block" />
+      <BigFlower variant="c" className="absolute -right-16 top-10 hidden h-[300px] w-[300px] opacity-80 lg:block" />
+      <BigFlower variant="b" className="absolute -left-16 bottom-10 hidden h-[280px] w-[280px] opacity-75 lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-3xl">

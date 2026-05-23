@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Petal } from "./FlowerArt";
+import { BigFlower, Petal } from "./FlowerArt";
 
 export default function FinalCTA() {
   const [sent, setSent] = useState(false);
@@ -10,6 +10,8 @@ export default function FinalCTA() {
     <section id="cta" className="relative overflow-hidden bg-white py-20 md:py-28">
       <Petal className="absolute -right-24 top-10 h-[300px] w-[300px] opacity-60" color="#fac94d" />
       <Petal className="absolute -left-32 -bottom-24 h-[360px] w-[360px] opacity-50" color="#cbcc66" />
+      <BigFlower variant="a" className="absolute -left-16 -bottom-16 hidden h-[300px] w-[300px] opacity-80 lg:block" />
+      <BigFlower variant="c" className="absolute -right-20 top-1/3 hidden h-[220px] w-[220px] opacity-70 xl:block" />
 
       <div className="container-x relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-start">
         <div>
