@@ -1,4 +1,4 @@
-import { BigFlower, Petal } from "./FlowerArt";
+import { BigFlower } from "./FlowerArt";
 
 const items = [
   { v: "от 1 млн ₽", t: "Запуск", note: "В зависимости от размера магазина" },
@@ -11,10 +11,7 @@ const items = [
 export default function Economics() {
   return (
     <section id="economics" className="relative overflow-hidden bg-brand-yellow/85 py-20 md:py-28">
-      <Petal className="absolute -left-24 -top-24 h-[300px] w-[300px] opacity-70" color="#cbcc66" />
-      <Petal className="absolute -right-24 -bottom-24 h-[300px] w-[300px] opacity-60" color="#ee845d" />
-      <BigFlower variant="a" className="absolute -right-16 -top-16 hidden h-[300px] w-[300px] opacity-80 lg:block" />
-      <BigFlower variant="c" className="absolute -left-16 -bottom-16 hidden h-[260px] w-[260px] opacity-75 lg:block" />
+      <BigFlower variant="a" className="absolute right-6 top-24 hidden h-[160px] w-[160px] opacity-90 lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-3xl">

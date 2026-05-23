@@ -35,8 +35,7 @@ function Chevron({ className = "" }: { className?: string }) {
 export default function WhatsIncluded() {
   return (
     <section id="included" className="relative overflow-hidden bg-white py-20 md:py-28">
-      <BigFlower variant="b" className="absolute -right-20 -top-16 hidden h-[320px] w-[320px] opacity-80 lg:block" />
-      <BigFlower variant="e" className="absolute -left-20 -bottom-16 hidden h-[300px] w-[300px] opacity-75 lg:block" />
+      <BigFlower variant="b" className="absolute bottom-10 right-6 hidden h-[160px] w-[160px] opacity-90 lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-4xl">

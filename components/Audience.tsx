@@ -11,8 +11,7 @@ const items = [
 export default function Audience() {
   return (
     <section id="audience" className="relative overflow-hidden bg-white py-20 md:py-28">
-      <BigFlower variant="c" className="absolute -right-16 top-10 hidden h-[300px] w-[300px] opacity-80 lg:block" />
-      <BigFlower variant="b" className="absolute -left-16 bottom-10 hidden h-[280px] w-[280px] opacity-75 lg:block" />
+      <BigFlower variant="c" className="absolute right-6 top-16 hidden h-[160px] w-[160px] opacity-90 lg:block" />
 
       <div className="container-x relative">
         <div className="max-w-3xl">
