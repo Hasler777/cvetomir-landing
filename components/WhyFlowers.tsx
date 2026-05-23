@@ -1,4 +1,4 @@
-import { BigFlower, Petal } from "./FlowerArt";
+import { BigFlower } from "./FlowerArt";
 
 const points = [
   {
@@ -22,7 +22,6 @@ const points = [
 export default function WhyFlowers() {
   return (
     <section id="why" className="relative overflow-hidden bg-white py-20 md:py-28">
-      <Petal className="absolute -left-24 -top-24 h-[280px] w-[280px] opacity-30" color="#fac94d" />
       <BigFlower variant="a" className="absolute -right-20 -top-16 hidden h-[300px] w-[300px] opacity-80 lg:block" />
       <BigFlower variant="c" className="absolute -left-16 -bottom-20 hidden h-[260px] w-[260px] opacity-70 lg:block" />
 
