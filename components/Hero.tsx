@@ -43,13 +43,13 @@ export default function Hero() {
         <ul className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
           {stats.map((s) => (
             <li key={s.label} className="card !p-6">
-              <div className="whitespace-nowrap font-display text-4xl font-extrabold leading-none text-brand-ink md:text-4xl">
+              <div className="whitespace-nowrap font-display text-4xl font-extrabold leading-none text-brand-coral md:text-4xl">
                 {s.value}
                 <span className="ml-1 text-2xl font-extrabold text-brand-coral md:text-2xl">
                   {s.unit}
                 </span>
               </div>
-              <div className="mt-3 text-base text-brand-moss md:text-sm">{s.label}</div>
+              <div className="mt-3 text-base font-medium text-brand-ink md:text-sm">{s.label}</div>
             </li>
           ))}
         </ul>
