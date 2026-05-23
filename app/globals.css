@@ -17,6 +17,22 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Запрет выделения текста на всём сайте */
+html {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Поля ввода оставляем выделяемыми (формы) */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 html {
   scroll-behavior: smooth;
 }
