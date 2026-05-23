@@ -9,6 +9,27 @@ const items = [
   { i: "08", t: "Сопровождение и развитие", d: "Поддерживаем запуск и помогаем расти точке после открытия." },
 ];
 
+function Chevron({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M9 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function WhatsIncluded() {
   return (
     <section id="included" className="bg-white py-20 md:py-28">
@@ -24,21 +45,53 @@ export default function WhatsIncluded() {
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it) => (
-            <li
-              key={it.i}
-              className="group card h-full transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(45,95,75,0.14)]"
-            >
-              <span className="inline-flex h-9 items-center rounded-full bg-brand-mint px-3 font-display text-sm font-bold text-brand-green">
-                {it.i}
-              </span>
-              <h3 className="mt-4 font-display text-lg font-bold text-brand-green">
-                {it.t}
-              </h3>
-              <p className="mt-2 text-sm text-brand-moss">{it.d}</p>
-            </li>
-          ))}
+        <ul className="mt-12 grid gap-4 sm:gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it, i) => {
+            const isLast = i === items.length - 1;
+            const lastColSm = i % 2 === 1; // последняя в ряду при 2 колонках
+            const lastColLg = i % 4 === 3; // последняя в ряду при 4 колонках
+            // Стрелка вправо видна, только если карточка не последняя в своём ряду
+            const rightArrow = [
+              "hidden",
+              lastColSm ? "" : "sm:flex",
+              lastColLg ? "lg:hidden" : "lg:flex",
+            ]
+              .filter(Boolean)
+              .join(" ");
+            return (
+              <li
+                key={it.i}
+                className="group card relative h-full transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(45,95,75,0.14)]"
+              >
+                <span className="inline-flex h-9 items-center rounded-full bg-brand-mint px-3 font-display text-sm font-bold text-brand-green">
+                  {it.i}
+                </span>
+                <h3 className="mt-4 font-display text-lg font-bold text-brand-green">
+                  {it.t}
+                </h3>
+                <p className="mt-2 text-sm text-brand-moss">{it.d}</p>
+
+                {!isLast && (
+                  <>
+                    {/* Стрелка вправо — между карточками в ряду (планшет/десктоп) */}
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-[calc(50%+1rem)] items-center text-brand-coral ${rightArrow}`}
+                    >
+                      <Chevron />
+                    </span>
+                    {/* Стрелка вниз — между карточками в столбик (мобайл) */}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-0 left-1/2 z-10 flex -translate-x-1/2 translate-y-1/2 text-brand-coral sm:hidden"
+                    >
+                      <Chevron className="rotate-90" />
+                    </span>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
