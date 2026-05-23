@@ -43,7 +43,7 @@ export default function Economics() {
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="#cta" className="btn-primary">Получить презентацию франшизы</a>
-          <a href="#cta" className="btn-secondary">Рассчитать запуск под ваш город</a>
+          <a href="#cta" className="btn-secondary !bg-brand-green !text-white">Рассчитать запуск под ваш город</a>
         </div>
       </div>
     </section>
