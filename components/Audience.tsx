@@ -17,7 +17,7 @@ export default function Audience() {
       <div className="container-x relative">
         <div className="max-w-3xl">
           <h2 className="font-display text-3xl font-bold leading-[1.1] text-brand-ink md:text-5xl">
-            Кому подойдёт франшиза «ЦветоМир»
+            Кому подойдёт франшиза <span className="text-brand-green">«ЦветоМир»</span>
           </h2>
         </div>
 
