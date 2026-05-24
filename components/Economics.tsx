@@ -26,7 +26,7 @@ export default function Economics() {
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((it) => (
             <li key={it.t} className="rounded-card bg-white p-6 shadow-card">
-              <div className="font-semibold text-brand-ink">{it.t}</div>
+              <div className="min-h-[3rem] font-semibold leading-snug text-brand-ink">{it.t}</div>
               <div className="mt-2 whitespace-nowrap font-display text-xl font-extrabold leading-tight text-brand-green md:text-2xl">
                 {it.v}
               </div>
