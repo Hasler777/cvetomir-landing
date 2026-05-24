@@ -29,8 +29,9 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        <a href="#cta" className="btn-primary !px-4 !py-2.5 text-sm md:!px-5 md:!py-3 md:text-base">
-          Получить презентацию
+        <a href="#cta" className="btn-primary shrink-0 !px-4 !py-2.5 text-sm md:!px-5 md:!py-3 md:text-base">
+          <span className="sm:hidden">Презентация</span>
+          <span className="hidden sm:inline">Получить презентацию</span>
         </a>
       </div>
     </header>

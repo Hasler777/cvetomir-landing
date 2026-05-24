@@ -35,6 +35,8 @@ input, textarea, [contenteditable="true"] {
 
 html {
   scroll-behavior: smooth;
+  /* clip (не hidden) — гасит горизонтальный скролл, не ломая sticky-шапку */
+  overflow-x: clip;
 }
 
 body {
@@ -43,6 +45,7 @@ body {
   font-family: var(--font-open-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, .display {
