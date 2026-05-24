@@ -28,7 +28,9 @@ export default function Hero() {
       <div className="container-x relative">
         <h1 className="max-w-4xl font-display text-4xl font-extrabold leading-[1.05] text-brand-ink md:text-6xl">
           Откройте цветочный магазин по модели, проверенной{" "}
-          <span className="whitespace-nowrap"><span className="accent">14&nbsp;годами</span>&nbsp;реальной&nbsp;работы</span>
+          <span className="md:whitespace-nowrap">
+            <span className="accent">14&nbsp;годами</span> реальной работы
+          </span>
         </h1>
         <p className="mt-6 max-w-3xl text-lg text-brand-moss md:text-xl">
           Франшиза «ЦветоМир» — это готовая система запуска и развития цветочного магазина.
