@@ -4,7 +4,8 @@ import { BigFlower } from "./FlowerArt";
 export default function Founder() {
   return (
     <section id="founder" className="relative overflow-hidden bg-brand-green py-20 text-white md:py-28">
-      <BigFlower variant="b" className="absolute bottom-8 left-6 hidden h-[150px] w-[150px] opacity-90 lg:block" />
+      <BigFlower variant="c" className="absolute left-[34%] top-6 hidden h-[110px] w-[110px] opacity-90 lg:block" />
+      <BigFlower variant="a" className="absolute bottom-6 left-[52%] hidden h-[120px] w-[120px] opacity-90 lg:block" />
 
       <div className="container-x relative grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="order-2 lg:order-1">
