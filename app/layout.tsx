@@ -105,7 +105,7 @@ export default function RootLayout({
         "@id": `${siteUrl}#organization`,
         name: "ЦветоМир",
         url: siteUrl,
-        logo: `${siteUrl}/logo.svg`,
+        logo: `${siteUrl}/logo-full.png`,
         founder: { "@type": "Person", name: "Ильнур Хузин" },
         foundingDate: "2011",
         sameAs: [],
