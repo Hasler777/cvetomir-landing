@@ -1,12 +1,12 @@
 import { BigFlower } from "./FlowerArt";
 
 const steps = [
-  { t: "Знакомство", d: "Первичная консультация и ответы на ваши вопросы." },
-  { t: "Формат и локация", d: "Подбираем подходящий формат точки и помещение, которое нравится вам." },
-  { t: "Подготовка помещения", d: "Сопровождаем ремонт, оформление магазина и закупку оборудования." },
-  { t: "Команда", d: "Помогаем нанять и собрать классную команду флористов и менеджеров." },
-  { t: "Поставки цветов", d: "Доставляем лучшие свежие цветы из ходового ассортимента, проверенного годами." },
-  { t: "Открытие и поддержка", d: "Запуск магазина и дальнейшее сопровождение после открытия." },
+  { t: "Знакомимся", d: "Первичная консультация и ответы на ваши вопросы." },
+  { t: "Вместе выбираем формат и локацию", d: "Подбираем подходящий формат точки и помещение, которое нравится вам." },
+  { t: "Готовим помещение", d: "Сопровождаем ремонт, оформление магазина и закупку оборудования." },
+  { t: "Собираем команду", d: "Помогаем нанять и собрать классную команду флористов и менеджеров." },
+  { t: "Доставляем вам лучшие свежие цветы", d: "Из ходового ассортимента, проверенного годами." },
+  { t: "Открываемся вместе", d: "В день запуска вы не остаётесь одни: помогаем пройти первые продажи, вопросы клиентов, работу команды и первые операционные задачи." },
 ];
 
 export default function Steps() {
@@ -22,14 +22,14 @@ export default function Steps() {
           <p className="mt-5 text-base text-brand-ink md:text-lg">Как мы помогаем открыть ваш магазин — шаг за шагом.</p>
         </div>
 
-        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-12 grid gap-5 md:auto-rows-fr md:grid-cols-2 lg:grid-cols-3">
           {steps.map((s, i) => (
-            <li key={s.t} className="relative card">
-              <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-coral font-display text-xl font-extrabold text-white">
+            <li key={s.t} className="relative card h-full">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-coral font-display text-xl font-extrabold text-white">
                   {i + 1}
                 </span>
-                <h3 className="font-display text-xl font-bold text-brand-ink">{s.t}</h3>
+                <h3 className="font-display text-xl font-bold leading-tight text-brand-ink">{s.t}</h3>
               </div>
               <p className="mt-4 text-brand-ink/80">{s.d}</p>
             </li>
@@ -37,8 +37,8 @@ export default function Steps() {
         </ol>
 
         <p className="mt-10 max-w-3xl rounded-2xl bg-brand-mint/60 px-5 py-4 font-display text-lg text-brand-ink">
-          И вот ваш бизнес работает: приносит прибыль вам и{" "}
-          <span className="font-extrabold text-brand-coral">радость вашим клиентам</span>.
+          И вот ваш бизнес работает: приносит прибыль — вам, и{" "}
+          <span className="font-extrabold text-brand-coral">радость — вашим клиентам</span>.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
