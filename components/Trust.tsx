@@ -45,16 +45,16 @@ export default function Trust() {
           </div>
         </div>
 
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-4">
           {stats.map((s) => (
             <li
               key={s.accent}
-              className="rounded-card bg-white p-6 shadow-card"
+              className="rounded-card bg-white p-5 shadow-card md:p-6"
             >
               <div className="font-display text-xl font-extrabold leading-tight text-brand-coral md:text-2xl">
                 {s.accent}
               </div>
-              <div className="mt-2 text-sm font-medium text-brand-ink md:text-base">
+              <div className="mt-1.5 text-sm font-medium text-brand-ink md:text-base">
                 {s.tail}
               </div>
             </li>
