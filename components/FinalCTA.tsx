@@ -54,7 +54,7 @@ export default function FinalCTA() {
                   type="text"
                   name="name"
                   className="mt-1 w-full rounded-xl border-2 border-brand-coral bg-white px-4 py-3 outline-none transition-colors focus:border-[#e9743f]"
-                  placeholder="Как к вам обращаться"
+                  placeholder="Как вас зовут?"
                 />
               </label>
               <label className="block">
