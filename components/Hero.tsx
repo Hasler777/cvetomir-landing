@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex flex-col justify-center overflow-hidden bg-white pt-8 pb-20 md:min-h-[calc(100svh-5rem)] md:pt-16 md:pb-28"
+      className="relative flex flex-col justify-center overflow-hidden bg-white pt-8 pb-20 md:min-h-[calc(100dvh-5rem)] md:pt-16 md:pb-28"
     >
       {/* Декор — крупные цветы и пятна */}
       <Petal className="absolute -top-40 -right-24 h-[560px] w-[560px] opacity-50" color="#cbcc66" />
