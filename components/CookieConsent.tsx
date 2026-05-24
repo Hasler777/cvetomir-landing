@@ -36,7 +36,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={accept}
-          className="btn-primary !px-7 !py-3 text-sm md:text-base shrink-0"
+          className="btn-primary !bg-brand-green !px-7 !py-3 text-sm md:text-base shrink-0"
         >
           Принять
         </button>
