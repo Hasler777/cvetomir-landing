@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Raleway, Open_Sans } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "@/components/CookieConsent";
+import ChatWidget from "@/components/ChatWidget";
 
 const raleway = Raleway({
   subsets: ["latin", "cyrillic"],
@@ -140,6 +141,7 @@ export default function RootLayout({
       <body>
         {children}
         <CookieConsent />
+        <ChatWidget />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
