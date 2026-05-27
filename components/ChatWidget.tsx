@@ -7,7 +7,7 @@ const CHAT_ID = "2bdc09d0-95ae-492c-b4d0-4844fc65a966";
 const INJECT_STYLES = `
   [data-id=chat-host] {
     bottom: 8px;
-    right: 8px;
+    right: 24px;
     align-items: end;
   }`;
 
