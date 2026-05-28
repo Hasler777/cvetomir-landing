@@ -1,9 +1,10 @@
+import Link from "next/link";
 import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="bg-brand-ink py-12 text-white/80">
-      <div className="container-x grid gap-8 md:grid-cols-[1.2fr_1fr_1fr]">
+      <div className="container-x grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
           <Logo mono="white" />
           <p className="mt-4 max-w-sm text-sm text-white/70">
@@ -21,7 +22,17 @@ export default function Footer() {
             <li><a href="#economics" className="hover:text-white">Экономика</a></li>
             <li><a href="#steps" className="hover:text-white">Этапы запуска</a></li>
             <li><a href="#founder" className="hover:text-white">Об основателе</a></li>
-            <li><a href="/privacy" className="hover:text-white">Политика обработки ПД</a></li>
+          </ul>
+        </div>
+        <div>
+          <div className="text-sm font-semibold uppercase tracking-wider text-brand-yellow">
+            Документы
+          </div>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li><Link href="/privacy" className="hover:text-white">Политика обработки персональных данных</Link></li>
+            <li><Link href="/cookies" className="hover:text-white">Политика использования cookies</Link></li>
+            <li><Link href="/consent" className="hover:text-white">Согласие на обработку данных</Link></li>
+            <li><Link href="/marketing-consent" className="hover:text-white">Согласие на рекламные сообщения</Link></li>
           </ul>
         </div>
         <div>

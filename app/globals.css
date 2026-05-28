@@ -139,3 +139,28 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-coral); o
     transition: none;
   }
 }
+
+/* Типографика для правовых страниц (политики и согласия) */
+@layer components {
+  .legal-prose {
+    @apply text-[15px] leading-relaxed text-brand-ink/80;
+  }
+  .legal-prose h2 {
+    @apply mb-2 mt-9 font-display text-xl font-bold leading-snug text-brand-ink;
+  }
+  .legal-prose h2:first-child {
+    @apply mt-0;
+  }
+  .legal-prose p {
+    @apply mt-3;
+  }
+  .legal-prose ul {
+    @apply mt-3 list-disc space-y-1.5 pl-5 marker:text-brand-green/50;
+  }
+  .legal-prose a {
+    @apply break-words font-medium text-brand-coral underline underline-offset-2 transition-colors hover:text-brand-green;
+  }
+  .legal-prose strong {
+    @apply font-semibold text-brand-ink;
+  }
+}
