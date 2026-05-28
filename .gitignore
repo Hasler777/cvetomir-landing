@@ -4,3 +4,7 @@ out/
 .DS_Store
 .env*.local
 *.log
+*.tsbuildinfo
+
+# Локальное хранилище заявок админки
+.data/
