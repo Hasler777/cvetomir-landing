@@ -4,8 +4,11 @@ import { ADMIN_COOKIE } from "@/lib/admin-auth";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function POST(req: Request) {
-  const res = NextResponse.redirect(new URL("/admin/login", req.url), { status: 303 });
+export async function POST() {
+  const res = new NextResponse(null, {
+    status: 303,
+    headers: { Location: "/admin/login" },
+  });
   res.cookies.set(ADMIN_COOKIE, "", {
     httpOnly: true,
     secure: true,

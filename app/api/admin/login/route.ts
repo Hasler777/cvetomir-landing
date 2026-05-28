@@ -9,6 +9,12 @@ import {
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// Относительный Location: браузер резолвит его от исходного домена.
+// new URL(path, req.url) за nginx даёт внутренний localhost:3000 — нельзя.
+function seeOther(path: string) {
+  return new NextResponse(null, { status: 303, headers: { Location: path } });
+}
+
 export async function POST(req: Request) {
   if (!adminConfigured()) {
     return NextResponse.json({ ok: false, error: "not_configured" }, { status: 500 });
@@ -28,10 +34,10 @@ export async function POST(req: Request) {
   }
 
   if (!checkPassword(password)) {
-    return NextResponse.redirect(new URL("/admin/login?e=1", req.url), { status: 303 });
+    return seeOther("/admin/login?e=1");
   }
 
-  const res = NextResponse.redirect(new URL("/admin", req.url), { status: 303 });
+  const res = seeOther("/admin");
   res.cookies.set(ADMIN_COOKIE, sessionToken(), {
     httpOnly: true,
     secure: true,
