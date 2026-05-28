@@ -5,6 +5,32 @@ import { BigFlower } from "./FlowerArt";
 
 export default function FinalCTA() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    setError(null);
+    setSubmitting(true);
+    const form = e.currentTarget;
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ok) throw new Error(json.error || "request_failed");
+      form.reset();
+      setSent(true);
+    } catch {
+      setError(
+        "Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам по телефону.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <section id="cta" className="relative overflow-hidden bg-white py-20 md:py-28">
@@ -28,10 +54,7 @@ export default function FinalCTA() {
 
         <form
           className="rounded-card border border-brand-mint bg-white p-7 shadow-card md:p-9"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
+          onSubmit={handleSubmit}
         >
           <h3 className="font-display text-2xl font-bold text-brand-ink">
             Остались вопросы?
@@ -47,6 +70,15 @@ export default function FinalCTA() {
             </div>
           ) : (
             <div className="mt-6 space-y-4">
+              {/* honeypot: скрыто от людей, заполняют только боты */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <label className="block">
                 <span className="text-sm text-brand-moss">Имя</span>
                 <input
@@ -98,8 +130,18 @@ export default function FinalCTA() {
                 </span>
               </label>
 
-              <button type="submit" className="btn-primary w-full">
-                Отправить заявку
+              {error && (
+                <p className="text-sm text-brand-coral" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? "Отправляем…" : "Отправить заявку"}
               </button>
             </div>
           )}
