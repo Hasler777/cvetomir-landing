@@ -85,6 +85,12 @@ export const metadata: Metadata = {
   },
   category: "business",
   formatDetection: { telephone: true, email: true, address: true },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: ["/favicon.svg"],
+    apple: [{ url: "/apple-icon", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export const viewport: Viewport = {
