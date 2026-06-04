@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ADMIN_COOKIE, adminConfigured, checkSession } from "@/lib/admin-auth";
 import { readLeads } from "@/lib/leads";
+import DeleteLeadButton from "./DeleteLeadButton";
 
 export const metadata: Metadata = {
   title: "Заявки — админка ЦветоМир",
@@ -84,6 +85,9 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-semibold">Телефон</th>
                   <th className="px-4 py-3 font-semibold">Город</th>
                   <th className="px-4 py-3 font-semibold">IP</th>
+                  <th className="px-4 py-3 font-semibold">
+                    <span className="sr-only">Действия</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -107,6 +111,9 @@ export default function AdminPage() {
                     <td className="px-4 py-3">{lead.city || "—"}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-brand-moss">
                       {lead.ip || "—"}
+                    </td>
+                    <td className="px-4 py-2.5">
+                      <DeleteLeadButton id={lead.id} />
                     </td>
                   </tr>
                 ))}

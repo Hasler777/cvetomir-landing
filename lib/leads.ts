@@ -29,6 +29,27 @@ export function appendLead(lead: Lead): void {
   fs.appendFileSync(leadsFile(), JSON.stringify(lead) + "\n", "utf8");
 }
 
+/** Удаляет заявку по id. Возвращает true, если заявка была найдена и удалена. */
+export function deleteLead(id: string): boolean {
+  let raw: string;
+  try {
+    raw = fs.readFileSync(leadsFile(), "utf8");
+  } catch {
+    return false;
+  }
+  const lines = raw.split("\n").filter((l) => l.trim());
+  const kept = lines.filter((line) => {
+    try {
+      return (JSON.parse(line) as Lead).id !== id;
+    } catch {
+      return true; // битые строки не трогаем
+    }
+  });
+  if (kept.length === lines.length) return false;
+  fs.writeFileSync(leadsFile(), kept.length ? kept.join("\n") + "\n" : "", "utf8");
+  return true;
+}
+
 export function readLeads(): Lead[] {
   let raw: string;
   try {
