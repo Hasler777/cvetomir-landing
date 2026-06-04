@@ -4,6 +4,7 @@ import Trust from "@/components/Trust";
 import WhyFlowers from "@/components/WhyFlowers";
 import WhatsIncluded from "@/components/WhatsIncluded";
 import Economics from "@/components/Economics";
+import ProfitCalculator from "@/components/ProfitCalculator";
 import Audience from "@/components/Audience";
 import Steps from "@/components/Steps";
 import Founder from "@/components/Founder";
@@ -21,6 +22,7 @@ export default function Page() {
         <Reveal><WhyFlowers /></Reveal>
         <Reveal><WhatsIncluded /></Reveal>
         <Reveal><Economics /></Reveal>
+        <Reveal><ProfitCalculator /></Reveal>
         <Reveal><Audience /></Reveal>
         <Reveal><Steps /></Reveal>
         <Reveal><Founder /></Reveal>
