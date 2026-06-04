@@ -53,6 +53,12 @@ h1, h2, h3, h4, .display {
   letter-spacing: -0.01em;
 }
 
+/* У Raleway по умолчанию «старостильные» цифры (3, 4, 5, 9 ниже строки) —
+   включаем ровные lining-цифры везде, где используется этот шрифт */
+h1, h2, h3, h4, .display, .font-display {
+  font-feature-settings: "lnum" 1;
+}
+
 button, a {
   -webkit-tap-highlight-color: transparent;
   outline: none;
