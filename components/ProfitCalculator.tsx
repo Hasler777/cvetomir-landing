@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import OpenLeadModalButton from "./OpenLeadModalButton";
 
 /* ─── Расчётная модель (по фактическому открытию в Нижнекамске) ─── */
 
@@ -75,29 +76,26 @@ function Slider(props: {
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-moss">{props.label}</div>
-      <div className="flex items-center gap-3">
-        <input
-          type="range"
-          min={props.min}
-          max={props.max}
-          step={props.step}
-          value={props.value}
-          onChange={(e) => props.onChange(parseInt(e.target.value))}
-          className="h-1.5 flex-1 cursor-pointer accent-brand-green"
-          aria-label={props.label}
-        />
-        <span className="min-w-[92px] text-right text-base font-bold tabular-nums text-brand-green">
-          {props.display}
-        </span>
-      </div>
+      <div className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-moss">{props.label}</div>
+      <input
+        type="range"
+        min={props.min}
+        max={props.max}
+        step={props.step}
+        value={props.value}
+        onChange={(e) => props.onChange(parseInt(e.target.value))}
+        className="h-1.5 w-full cursor-pointer accent-brand-green"
+        aria-label={props.label}
+      />
+      {/* значение под ползунком — сразу видно, что именно меняешь */}
+      <span className="text-lg font-bold tabular-nums text-brand-green">{props.display}</span>
     </div>
   );
 }
 
 function CardLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mb-4 text-[11px] font-bold uppercase tracking-[0.1em] text-brand-moss">{children}</div>
+    <div className="mb-4 font-display text-lg font-bold text-brand-ink md:text-xl">{children}</div>
   );
 }
 
@@ -200,7 +198,8 @@ function ProfitChart({ opt, base, pess }: { opt: number[]; base: number[]; pess:
 
 export default function ProfitCalculator() {
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<"invest" | "economy">("invest");
+  // Сначала показываем доходную часть, а не расходы на открытие
+  const [tab, setTab] = useState<"invest" | "economy">("economy");
 
   // Инвестиции на открытие
   const [area, setArea] = useState(60);
@@ -208,12 +207,14 @@ export default function ProfitCalculator() {
   const [stock, setStock] = useState(776000);
 
   // Экономика точки
-  const [avgCheck, setAvgCheck] = useState(1700);
-  const [peakSales, setPeakSales] = useState(1000);
-  const [mktMonth, setMktMonth] = useState(40000);
+  const [avgCheck, setAvgCheck] = useState(3000);
+  const [peakSales, setPeakSales] = useState(1200);
+  const [mktMonth, setMktMonth] = useState(100000);
   const [fot, setFot] = useState([
-    { role: "Управляющий", sal: "60000" },
-    { role: "Флорист", sal: "40000" },
+    { role: "Управляющий", sal: "80000" },
+    { role: "Флорист 2/2", sal: "50000" },
+    { role: "Флорист 2/2", sal: "50000" },
+    { role: "Менеджер", sal: "50000" },
   ]);
 
   /* — Инвестиции — */
@@ -283,6 +284,39 @@ export default function ProfitCalculator() {
     { t: "14 лет практики", s: "Передаём только то, что реально работает в нашей сети" },
   ];
 
+  // KPI и сценарии рендерятся дважды: сверху вкладки и внизу под помесячным расчётом
+  const kpiGrid = (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {kpis.map((k) => (
+        <div key={k.l} className="rounded-card bg-white p-5 shadow-card">
+          <div className="text-xs font-medium text-brand-moss">{k.l}</div>
+          <div className={`mt-1.5 font-display text-2xl font-extrabold leading-none ${k.c}`}>{k.v}</div>
+          <div className="mt-1.5 text-[11px] text-brand-moss">{k.s}</div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const scenarioCards = (
+    <div className="grid gap-3 sm:grid-cols-3">
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+        <div className="text-sm font-bold uppercase tracking-[0.06em] text-emerald-700">Оптимистичный</div>
+        <div className="mt-1.5 font-display text-xl font-extrabold text-emerald-700">{fmt(optProfit)}</div>
+        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">×1.2 продажи, маркетинг на максимуме</div>
+      </div>
+      <div className="rounded-2xl border border-brand-green/20 bg-brand-mint/50 p-5">
+        <div className="text-sm font-bold uppercase tracking-[0.06em] text-brand-green">Базовый</div>
+        <div className="mt-1.5 font-display text-xl font-extrabold text-brand-green">{fmt(baseProfit)}</div>
+        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">Ваши текущие настройки</div>
+      </div>
+      <div className="rounded-2xl border border-red-200 bg-red-50 p-5">
+        <div className="text-sm font-bold uppercase tracking-[0.06em] text-red-800">Пессимистичный</div>
+        <div className="mt-1.5 font-display text-xl font-extrabold text-red-800">{fmt(pessProfit)}</div>
+        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">×0.6 продажи, нет маркетинга, расходы +15%</div>
+      </div>
+    </div>
+  );
+
   return (
     <section id="calculator">
       {/* Кнопка-«мини-раздел» на всю ширину страницы */}
@@ -323,8 +357,8 @@ export default function ProfitCalculator() {
               <div className="mt-10 flex gap-3">
                 {(
                   [
-                    ["invest", "Инвестиции на открытие"],
                     ["economy", "Экономика точки"],
+                    ["invest", "Инвестиции на открытие"],
                   ] as const
                 ).map(([id, label]) => (
                   <button
@@ -427,35 +461,11 @@ export default function ProfitCalculator() {
                     </div>
                   </div>
 
-                  <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                    {kpis.map((k) => (
-                      <div key={k.l} className="rounded-card bg-white p-5 shadow-card">
-                        <div className="text-xs font-medium text-brand-moss">{k.l}</div>
-                        <div className={`mt-1.5 font-display text-2xl font-extrabold leading-none ${k.c}`}>{k.v}</div>
-                        <div className="mt-1.5 text-[11px] text-brand-moss">{k.s}</div>
-                      </div>
-                    ))}
-                  </div>
+                  <div className="mt-5">{kpiGrid}</div>
 
                   <div className="mt-5 rounded-card bg-white p-6 shadow-card">
                     <CardLabel>Три сценария — прибыль за год</CardLabel>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-                        <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-emerald-700">Оптимистичный</div>
-                        <div className="mt-1.5 font-display text-xl font-extrabold text-emerald-700">{fmt(optProfit)}</div>
-                        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">×1.2 продажи, маркетинг на максимуме</div>
-                      </div>
-                      <div className="rounded-2xl border border-brand-green/20 bg-brand-mint/50 p-5">
-                        <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-brand-green">Базовый</div>
-                        <div className="mt-1.5 font-display text-xl font-extrabold text-brand-green">{fmt(baseProfit)}</div>
-                        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">Ваши текущие настройки</div>
-                      </div>
-                      <div className="rounded-2xl border border-red-200 bg-red-50 p-5">
-                        <div className="text-[10px] font-bold uppercase tracking-[0.08em] text-red-800">Пессимистичный</div>
-                        <div className="mt-1.5 font-display text-xl font-extrabold text-red-800">{fmt(pessProfit)}</div>
-                        <div className="mt-1 text-[11px] leading-relaxed text-brand-moss">×0.6 продажи, нет маркетинга, расходы +15%</div>
-                      </div>
-                    </div>
+                    {scenarioCards}
 
                     <div className="mt-5 flex flex-wrap gap-4 text-xs font-medium text-brand-moss">
                       <span><span className="mr-1.5 inline-block h-3 w-3 rounded-sm align-middle" style={{ background: "#1F7A40" }} />Оптимистичный</span>
@@ -475,16 +485,16 @@ export default function ProfitCalculator() {
                   <div className="mt-5 rounded-card bg-brand-green p-6 text-white shadow-card">
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div>
-                        <div className="text-[11px] text-white/70">Средняя выручка / мес.</div>
-                        <div className="mt-1 text-lg font-bold tabular-nums">{fmt(avgRev)}</div>
+                        <div className="text-sm font-bold text-white md:text-base">Средняя выручка / мес.</div>
+                        <div className="mt-1 text-xl font-bold tabular-nums md:text-2xl">{fmt(avgRev)}</div>
                       </div>
                       <div>
-                        <div className="text-[11px] text-white/70">Себестоимость (40%)</div>
-                        <div className="mt-1 text-lg font-bold tabular-nums">{fmt(avgRev * 0.4)}</div>
+                        <div className="text-sm font-bold text-white md:text-base">Себестоимость (40%)</div>
+                        <div className="mt-1 text-xl font-bold tabular-nums md:text-2xl">{fmt(avgRev * 0.4)}</div>
                       </div>
                       <div>
-                        <div className="text-[11px] text-white/70">Закупать в месяц (+5% списание)</div>
-                        <div className="mt-1 text-lg font-bold tabular-nums">{fmt(avgRev * 0.45)}</div>
+                        <div className="text-sm font-bold text-white md:text-base">Закупать в месяц (+5% списание)</div>
+                        <div className="mt-1 text-xl font-bold tabular-nums md:text-2xl">{fmt(avgRev * 0.45)}</div>
                       </div>
                     </div>
                     <p className="mt-4 text-[11px] leading-relaxed text-white/60">
@@ -493,8 +503,9 @@ export default function ProfitCalculator() {
                   </div>
 
                   <div className="mt-5 rounded-2xl bg-brand-mint/50 p-5 text-[13px] leading-7 text-brand-moss">
-                    <strong className="text-brand-green">Как считается прибыль:</strong>
-                    <br />
+                    <div className="mb-2 font-display text-lg font-bold text-brand-green md:text-xl">
+                      Как считается прибыль
+                    </div>
                     Продажи = пиковые × сезонность × загрузка ×{" "}
                     <strong className="text-brand-green">коэф. маркетинга</strong>
                     <br />
@@ -554,7 +565,7 @@ export default function ProfitCalculator() {
                       >
                         + добавить сотрудника
                       </button>
-                      <div className="mt-4 border-t border-brand-green/10 pt-3 text-right text-sm font-bold text-brand-green">
+                      <div className="mt-4 border-t border-brand-green/10 pt-3 text-right font-display text-lg font-bold text-brand-green md:text-xl">
                         Итого ФОТ: {fmt(fotSum)}
                       </div>
                     </div>
@@ -588,7 +599,12 @@ export default function ProfitCalculator() {
                   </div>
 
                   <div className="mt-5 rounded-card bg-white p-6 shadow-card">
-                    <CardLabel>Помесячный расчёт — базовый сценарий</CardLabel>
+                    <h3 className="font-display text-xl font-bold text-brand-ink md:text-2xl">
+                      Ваша чистая прибыль с одной точки
+                    </h3>
+                    <p className="mb-4 mt-1 text-sm text-brand-moss">
+                      Помесячный расчёт — базовый сценарий
+                    </p>
                     <div className="overflow-x-auto">
                       <table className="w-full min-w-[640px] border-collapse text-[13px]">
                         <thead>
@@ -620,8 +636,21 @@ export default function ProfitCalculator() {
                       </table>
                     </div>
                   </div>
+
+                  {/* Дубль итогов: посетитель долистал до низа — и снова видит, сколько заработает */}
+                  <div className="mt-5">{kpiGrid}</div>
+                  <div className="mt-5 rounded-card bg-white p-6 shadow-card">
+                    <CardLabel>Три сценария — прибыль за год</CardLabel>
+                    {scenarioCards}
+                  </div>
                 </div>
               )}
+
+              <div className="mt-10 flex justify-center">
+                <OpenLeadModalButton className="btn-primary !px-10 !py-5 text-lg">
+                  Оставить заявку на франшизу
+                </OpenLeadModalButton>
+              </div>
 
               <p className="mt-8 text-xs leading-relaxed text-brand-moss">
                 Расчёт носит ориентировочный характер, основан на показателях действующей

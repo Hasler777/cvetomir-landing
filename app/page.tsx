@@ -10,6 +10,7 @@ import Steps from "@/components/Steps";
 import Founder from "@/components/Founder";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import LeadModal from "@/components/LeadModal";
 import Reveal from "@/components/Reveal";
 
 export default function Page() {
@@ -29,6 +30,7 @@ export default function Page() {
         <Reveal><FinalCTA /></Reveal>
       </main>
       <Footer />
+      <LeadModal />
     </>
   );
 }
