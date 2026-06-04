@@ -19,10 +19,10 @@ export default function Page() {
       <main>
         <Hero />
         <Reveal><Trust /></Reveal>
+        <Reveal><ProfitCalculator /></Reveal>
         <Reveal><WhyFlowers /></Reveal>
         <Reveal><WhatsIncluded /></Reveal>
         <Reveal><Economics /></Reveal>
-        <Reveal><ProfitCalculator /></Reveal>
         <Reveal><Audience /></Reveal>
         <Reveal><Steps /></Reveal>
         <Reveal><Founder /></Reveal>

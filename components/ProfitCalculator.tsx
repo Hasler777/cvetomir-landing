@@ -291,7 +291,7 @@ export default function ProfitCalculator() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="profit-calculator-body"
-        className="group flex w-full items-center justify-center gap-4 bg-brand-green px-6 py-7 text-white transition-colors duration-150 hover:bg-[#27553f] md:gap-6 md:py-8"
+        className="group flex w-full items-center justify-center gap-4 bg-brand-coral px-6 py-7 text-white transition-colors duration-150 hover:bg-[#e9743f] md:gap-6 md:py-8"
       >
         <Chevron up={open} />
         <span className="font-display text-lg font-bold md:text-2xl">
